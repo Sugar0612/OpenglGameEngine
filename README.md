@@ -39,6 +39,6 @@
 	glfwPollEvents();
  }
  ```
- 更多请查看源文件里面有详细的注释[Source code](./main.cpp)
+ 更多请查看源文件里面有详细的注释[Source code](./Source/main.cpp)
 # 交流
 <img src = "https://raw.githubusercontent.com/Sugar0612/ReBirth/main/image/Wechat.png" width="500" alt="wechat">
