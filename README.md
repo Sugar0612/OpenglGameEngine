@@ -15,8 +15,8 @@
  - 在`项目->属性->链接器->输入->附加依赖项`中加入 `opengl32.lib`, `glfw3.lib` 和 `glew32s.lib`。  
    ![Linker in](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png)
  环境搭载完成，如果失败请自行官网下载[Glfw DownLoad](https://www.glfw.org/)
-
-- 基本功能的实现
+ 
+## 基本功能的实现
  我会放一些我学习到的必要且基础的代码用来回顾。
  - 初始化与窗口的搭建
  关于窗口搭建，需要定义窗口
