@@ -9,11 +9,11 @@
  最初学习过程中，要使用Opengl需要搭载合适的环境。目前本人使用的是 `VS2019 + glfw3.3 + glm + glew2.1`。  
  插件文件下载[Opengl Working environment](./opengl.zip)  
  - 在`项目->属性->C++->链接器->常规->附加库目录`中加入 `YourPath\glfw-3.3.4.bin.WIN32\include` 和 `YourPath\glew-2.1.0\include`。  
-   ![C++](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png)
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png" width="500" alt="C++">
  - 在`项目->属性->链接器->常规->附加库目录`中加入 `YourPath\glfw-3.3.4.bin.WIN32\lib-vc2019` 和 `YourPath\glew-2.1.0\lib\Release\Win32`。  
-   ![Linker](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png)
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png" width="500" alt="Linker">
  - 在`项目->属性->链接器->输入->附加依赖项`中加入 `opengl32.lib`, `glfw3.lib` 和 `glew32s.lib`。  
-   ![Linker in](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png)
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png" width="500" alt="Linker In">
  环境搭载完成，如果失败请自行官网下载[Glfw DownLoad](https://www.glfw.org/)
  
 ## 基本功能的实现
