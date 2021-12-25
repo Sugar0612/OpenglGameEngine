@@ -9,7 +9,7 @@ English | [简体中文](./README-CN.md)
 - Environment loading
  In the initial learning process, to use Opengl needs to be equipped with a suitable environment. I am currently using `VS2019 + glfw3.3 + glm + glew2.1`.
  Plug-in file download [Opengl Working environment](./opengl.zip)
- - Add `YourPath\glfw-3.3.4.bin.WIN32\include` and `YourPath\glew-2.1.0\ in `Project->Properties->C++->Linker->General->Additional library directory` include`.
+ - Add `YourPath\glfw-3.3.4.bin.WIN32\include` and `YourPath\glew-2.1.0\ in `Project->Properties->C++->Linker->General->Additional library directory` include`.  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png" width="400" alt="C++">
  - Add `YourPath\glfw-3.3.4.bin.WIN32\lib-vc2019` and `YourPath\glew-2.1.0\lib in `Project->Properties->Linker->General->Additional Library Directory` \Release\Win32`.  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png" width="400" alt="Linker">
