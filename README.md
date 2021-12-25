@@ -10,11 +10,11 @@ English | [简体中文](./README-CN.md)
  In the initial learning process, to use Opengl needs to be equipped with a suitable environment. I am currently using `VS2019 + glfw3.3 + glm + glew2.1`.
  Plug-in file download [Opengl Working environment](./opengl.zip)
  - Add `YourPath\glfw-3.3.4.bin.WIN32\include` and `YourPath\glew-2.1.0\ in `Project->Properties->C++->Linker->General->Additional library directory` include`.
-   ![C++](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png)
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png" width="400" alt="C++">
  - Add `YourPath\glfw-3.3.4.bin.WIN32\lib-vc2019` and `YourPath\glew-2.1.0\lib in `Project->Properties->Linker->General->Additional Library Directory` \Release\Win32`.
-   ![Linker](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png)
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png" width="400" alt="Linker">
  - Add `opengl32.lib`, `glfw3.lib` and `glew32s.lib` in `Project->Properties->Linker->Input->Additional dependencies`.
-   ![Linker in](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png)
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png" width="400" alt="Linker In">  
  The environment loading is complete, if it fails, please download [Glfw DownLoad] from the official website (https://www.glfw.org/)
 
 ## content
