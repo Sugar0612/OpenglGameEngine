@@ -1,24 +1,24 @@
 # OpenglGameEngine
-¼òÌåÖĞÎÄ | [English](./README.md)  
+ç®€ä½“ä¸­æ–‡ | [English](./README.md)  
 ![image](https://img.shields.io/badge/Base-Opengl-blue.svg)   ![image](https://img.shields.io/badge/Language-c++-orange.svg)
-## ¼òÊö
-  ¹ØÓÚOpenGLµÄÈëÃÅ½Ì³Ì±Ê¼Ç¡£Ñ§Ï°²å¼şÏÂÔØ£¬»·¾³´îÔØ£¬Í¼ĞÎäÖÈ¾Ô­Àí£¬Shader...   
-  Äã¿ÉÒÔÍ¨¹ıOpengl¹Ù·½ÎÄµµÀ´Ñ§Ï° [OpenGL Documentation](https://learnopengl.com/Getting-started/Hello-Window)
+## ç®€è¿°
+  å…³äºOpenGLçš„å…¥é—¨æ•™ç¨‹ç¬”è®°ã€‚å­¦ä¹ æ’ä»¶ä¸‹è½½ï¼Œç¯å¢ƒæ­è½½ï¼Œå›¾å½¢æ¸²æŸ“åŸç†ï¼ŒShader...   
+  ä½ å¯ä»¥é€šè¿‡Openglå®˜æ–¹æ–‡æ¡£æ¥å­¦ä¹  [OpenGL Documentation](https://learnopengl.com/Getting-started/Hello-Window)
 
-## Ñ§Ï°
-- »·¾³´îÔØ
- ×î³õÑ§Ï°¹ı³ÌÖĞ£¬ÒªÊ¹ÓÃOpenglĞèÒª´îÔØºÏÊÊµÄ»·¾³¡£Ä¿Ç°±¾ÈËÊ¹ÓÃµÄÊÇ `VS2019 + glfw3.3 + glm + glew2.1`¡£  
- ²å¼şÎÄ¼şÏÂÔØ[Opengl Working environment](./opengl.zip)  
- - ÔÚ`ÏîÄ¿->ÊôĞÔ->C++->Á´½ÓÆ÷->³£¹æ->¸½¼Ó¿âÄ¿Â¼`ÖĞ¼ÓÈë `YourPath\glfw-3.3.4.bin.WIN32\include` ºÍ `YourPath\glew-2.1.0\include`¡£  
-   ![C++](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png)
- - ÔÚ`ÏîÄ¿->ÊôĞÔ->Á´½ÓÆ÷->³£¹æ->¸½¼Ó¿âÄ¿Â¼`ÖĞ¼ÓÈë `YourPath\glfw-3.3.4.bin.WIN32\lib-vc2019` ºÍ `YourPath\glew-2.1.0\lib\Release\Win32`¡£  
-   ![Linker](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png)
- - ÔÚ`ÏîÄ¿->ÊôĞÔ->Á´½ÓÆ÷->ÊäÈë->¸½¼ÓÒÀÀµÏî`ÖĞ¼ÓÈë `opengl32.lib`, `glfw3.lib` ºÍ `glew32s.lib`¡£  
-   ![Linker in](https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png)
- »·¾³´îÔØÍê³É£¬Èç¹ûÊ§°ÜÇë×ÔĞĞ¹ÙÍøÏÂÔØ[Glfw DownLoad](https://www.glfw.org/)
+## å­¦ä¹ 
+- ç¯å¢ƒæ­è½½
+ æœ€åˆå­¦ä¹ è¿‡ç¨‹ä¸­ï¼Œè¦ä½¿ç”¨Opengléœ€è¦æ­è½½åˆé€‚çš„ç¯å¢ƒã€‚ç›®å‰æœ¬äººä½¿ç”¨çš„æ˜¯ `VS2019 + glfw3.3 + glm + glew2.1`ã€‚  
+ æ’ä»¶æ–‡ä»¶ä¸‹è½½[Opengl Working environment](./opengl.zip)  
+ - åœ¨`é¡¹ç›®->å±æ€§->C++->é“¾æ¥å™¨->å¸¸è§„->é™„åŠ åº“ç›®å½•`ä¸­åŠ å…¥ `YourPath\glfw-3.3.4.bin.WIN32\include` å’Œ `YourPath\glew-2.1.0\include`ã€‚  
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png" width="400" alt="C++">
+ - åœ¨`é¡¹ç›®->å±æ€§->é“¾æ¥å™¨->å¸¸è§„->é™„åŠ åº“ç›®å½•`ä¸­åŠ å…¥ `YourPath\glfw-3.3.4.bin.WIN32\lib-vc2019` å’Œ `YourPath\glew-2.1.0\lib\Release\Win32`ã€‚  
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png" width="400" alt="Linker">
+ - åœ¨`é¡¹ç›®->å±æ€§->é“¾æ¥å™¨->è¾“å…¥->é™„åŠ ä¾èµ–é¡¹`ä¸­åŠ å…¥ `opengl32.lib`, `glfw3.lib` å’Œ `glew32s.lib`ã€‚  
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png" width="400" alt="Linker In">  
+ ç¯å¢ƒæ­è½½å®Œæˆï¼Œå¦‚æœå¤±è´¥è¯·è‡ªè¡Œå®˜ç½‘ä¸‹è½½[Glfw DownLoad](https://www.glfw.org/)
  
-## ÄÚÈİ
- Äú¿ÉÒÔÍ¨¹ıÄ¿Â¼¿ìËÙ²é¿´ÄúÏëÁË½âµÄ²¿·Ö¡£
+## å†…å®¹
+ æ‚¨å¯ä»¥é€šè¿‡ç›®å½•å¿«é€ŸæŸ¥çœ‹æ‚¨æƒ³äº†è§£çš„éƒ¨åˆ†ã€‚
  Module    |  File Link
  --------  |  ----------------
  Window    |  [Window](./Source/main.cpp)
@@ -27,27 +27,27 @@
  Material  |  [Material](./Source/Material.h)
  Mesh      |  [Mesh](./Source/Mesh.h)
 
-## »ù±¾¹¦ÄÜµÄÊµÏÖ
- ÎÒ»á·ÅÒ»Ğ©ÎÒÑ§Ï°µ½µÄ±ØÒªÇÒ»ù´¡µÄ´úÂëÓÃÀ´»Ø¹Ë¡£
- - ³õÊ¼»¯Óë´°¿ÚµÄ´î½¨
- ¹ØÓÚ´°¿Ú´î½¨£¬ĞèÒª¶¨Òå´°¿Ú
+## åŸºæœ¬åŠŸèƒ½çš„å®ç°
+ æˆ‘ä¼šæ”¾ä¸€äº›æˆ‘å­¦ä¹ åˆ°çš„å¿…è¦ä¸”åŸºç¡€çš„ä»£ç ç”¨æ¥å›é¡¾ã€‚
+ - åˆå§‹åŒ–ä¸çª—å£çš„æ­å»º
+ å…³äºçª—å£æ­å»ºï¼Œéœ€è¦å®šä¹‰çª—å£
  ```cpp
  /*Create window*/
  GLFWwindow* window = glfwCreateWindow(800, 600, "OpenglEngine", nullptr, nullptr);
  ```
- È»ºó½øĞĞäÖÈ¾ÏÔÊ¾, µ±È»ÔÚäÖÈ¾µÄ¹ı³ÌÖĞÎÒÃÇĞèÒªÊ¹ÓÃäÖÈ¾»ØÈ¦¡£
+ ç„¶åè¿›è¡Œæ¸²æŸ“æ˜¾ç¤º, å½“ç„¶åœ¨æ¸²æŸ“çš„è¿‡ç¨‹ä¸­æˆ‘ä»¬éœ€è¦ä½¿ç”¨æ¸²æŸ“å›åœˆã€‚
  ```cpp
  /*Canves window*/
  glViewport(0, 0, 800, 600);
  
- /*äÖÈ¾»ØÈ¦*/
+ /*æ¸²æŸ“å›åœˆ*/
  while(!glfwWindowShouldClose(window)) {
 
-	/*ÑÕÉ«Ôİ´æÇø¿é½»»»*/
+	/*é¢œè‰²æš‚å­˜åŒºå—äº¤æ¢*/
 	glfwSwapBuffers(window);
 
-	/*»ñÈ¡ÓÃ»§°´Å¥*/
+	/*è·å–ç”¨æˆ·æŒ‰é’®*/
 	glfwPollEvents();
  }
  ```
- ¸ü¶àÇë²é¿´Ô´ÎÄ¼şÀïÃæÓĞÏêÏ¸µÄ×¢ÊÍ[Source code](./Source/main.cpp)
+ æ›´å¤šè¯·æŸ¥çœ‹æºæ–‡ä»¶é‡Œé¢æœ‰è¯¦ç»†çš„æ³¨é‡Š[Source code](./Source/main.cpp)
