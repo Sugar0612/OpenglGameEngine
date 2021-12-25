@@ -11,7 +11,7 @@ English | [简体中文](./README-CN.md)
  Plug-in file download [Opengl Working environment](./opengl.zip)
  - Add `YourPath\glfw-3.3.4.bin.WIN32\include` and `YourPath\glew-2.1.0\ in `Project->Properties->C++->Linker->General->Additional library directory` include`.
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl1.png" width="400" alt="C++">
- - Add `YourPath\glfw-3.3.4.bin.WIN32\lib-vc2019` and `YourPath\glew-2.1.0\lib in `Project->Properties->Linker->General->Additional Library Directory` \Release\Win32`.
+ - Add `YourPath\glfw-3.3.4.bin.WIN32\lib-vc2019` and `YourPath\glew-2.1.0\lib in `Project->Properties->Linker->General->Additional Library Directory` \Release\Win32`.  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png" width="400" alt="Linker">
  - Add `opengl32.lib`, `glfw3.lib` and `glew32s.lib` in `Project->Properties->Linker->Input->Additional dependencies`.  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png" width="400" alt="Linker In">  
