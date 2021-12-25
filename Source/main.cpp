@@ -51,6 +51,11 @@ int main() {
 
 	/*渲染回圈*/
 	while(!glfwWindowShouldClose(window)) {
+		/* 颜色清屏 */
+		glClearColor(0.2f, 0.3f, 0.3f, 1.f);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		ProcessInput(window);
 
 		/*颜色暂存区块交换*/
 		glfwSwapBuffers(window);
