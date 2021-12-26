@@ -1,0 +1,4 @@
+﻿  main.cpp
+H:\Project\OpenglEngine\OpenglEngine\main.h(6,35): warning C4099: “GLFWwindow”: 类型名称以前使用“struct”现在使用的是“class”
+D:\OpenGL\glfw-3.3.4.bin.WIN32\include\GLFW\glfw3.h(1182): message : 参见“GLFWwindow”的声明
+  OpenglEngine.vcxproj -> H:\Project\OpenglEngine\Debug\OpenglEngine.exe
