@@ -55,7 +55,8 @@ English | [简体中文](./README-CN.md)
 
  - Principle of rendering
    the schematic：  
-   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Shader.png" width="400" alt="Shader"> 
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Shader.png" width="400" alt="Shader">   
+   
    I try to use my understanding to explain clearly how an .obj file is loaded and used.  
   
    When an .obj file is read to the CPU, it will reach the GPU through a long distance. At this time, the digital coordinates parsed by the .obj file cannot be recognized (arr), we need to install it to an array coordinate that can be recognized.  
