@@ -27,8 +27,9 @@ English | [简体中文](./README-CN.md)
  Material  |  [Material](./OpenglEngine/Material.h)
  Mesh      |  [Mesh](./OpenglEngine/Mesh.h)
 
-## The realization of basic functions
-   I will put some necessary and basic code that I have learned for review.  
+## The realization of basic functions  
+
+  I will put some necessary and basic code that I have learned for review.  
 - Initialization and window construction
   Regarding window construction, you need to define the window
   ```cpp
