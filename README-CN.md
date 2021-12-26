@@ -30,27 +30,27 @@
 ## 基本功能的实现
  我会放一些我学习到的必要且基础的代码用来回顾。
  - 初始化与窗口的搭建
- 关于窗口搭建，需要定义窗口
- ```cpp
- /*Create window*/
- GLFWwindow* window = glfwCreateWindow(800, 600, "OpenglEngine", nullptr, nullptr);
- ```
- 然后进行渲染显示, 当然在渲染的过程中我们需要使用渲染回圈。
- ```cpp
- /*Canves window*/
- glViewport(0, 0, 800, 600);
- 
- /*渲染回圈*/
- while(!glfwWindowShouldClose(window)) {
-
-	/*颜色暂存区块交换*/
-	glfwSwapBuffers(window);
-
-	/*获取用户按钮*/
-	glfwPollEvents();
- }
- ```
- 更多请查看源文件里面有详细的注释[创建窗口](./OpenglEngine/main.cpp)
+   关于窗口搭建，需要定义窗口
+   ```cpp
+   /*Create window*/
+   GLFWwindow* window = glfwCreateWindow(800, 600, "OpenglEngine", nullptr, nullptr);
+   ```
+   然后进行渲染显示, 当然在渲染的过程中我们需要使用渲染回圈。
+   ```cpp
+   /*Canves window*/
+   glViewport(0, 0, 800, 600);
+   
+   /*渲染回圈*/
+   while(!glfwWindowShouldClose(window)) {
+  
+  	/*颜色暂存区块交换*/
+  	glfwSwapBuffers(window);
+  
+  	/*获取用户按钮*/
+  	glfwPollEvents();
+   }
+   ```
+   更多请查看源文件里面有详细的注释[创建窗口](./OpenglEngine/main.cpp)
 
  - 渲染的原理   
    原理图：  
@@ -65,4 +65,4 @@
    首先我们要创建VertexShader 与 fragmentShader，然后将Source塞入到里面，在将VertexShader 与 fragmentShader贴到 shaderProgram上，然后shaderProgram连接到Shader，这样Shader就可以读入 Source中的代码了！   
    连接上之后，在渲染回圈中使用连接上的 shaderProgram，接着将VAO绑定在 Vertex Shader上，利用VAO中的顶点数组绘制顶点，然后再往后的Shader中绘制图形。  
 
- 更多请查看源文件里面有详细的注释[渲染原理](./OpenglEngine/main.cpp)
+   更多请查看源文件里面有详细的注释[渲染原理](./OpenglEngine/main.cpp)
