@@ -60,7 +60,7 @@ English | [简体中文](./README-CN.md)
   When an .obj file is read to the CPU, it will reach the GPU through a long distance. At this time, the digital coordinates parsed by the .obj file cannot be recognized (arr), we need to install it to an array coordinate that can be recognized.  
   These arrs will be placed in the VBO after they reach the GPU. We need to bind this VBO to the VAO (GL_ARRARY_BUFFER), and plug it into the vertexShader through the VAO to draw the vertices.  
  
- - Shader
+ - Shader  
   Putting VAO into VertexShader we also need to operate vertexShader and fragmentShader, so we also need to write vertexShaderSource and fragmentShaderSource code in the code to tell the GPU how to draw these vertices.  
   First, we need to create VertexShader and fragmentShader, then insert the Source into it, paste the VertexShader and fragmentShader onto the shaderProgram, and then connect the shaderProgram to the Shader, so that the Shader can read the code in the Source!  
   After connecting, use the connected shaderProgram in the rendering loop, then bind the VAO to the Vertex Shader, use the vertex array in the VAO to draw the vertices, and then draw the graphics in the subsequent Shader.   
