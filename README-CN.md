@@ -53,15 +53,16 @@
  更多请查看源文件里面有详细的注释[创建窗口](./OpenglEngine/main.cpp)
 
  - 渲染的原理   
- 原理图：  
- <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Shader.png" width="400" alt="Shader">  
- 我尽量用我的理解来解释清楚一个.obj文件是如何加载和使用的。  
- 当读入一个 .obj文件到CPU后会通过很长的距离到达GPU，此时.obj文件解析成的数字坐标还不能被识别(arr)，我们需要把他装换成可以被识别的数组坐标。  
- 这些arr到达GPU后会放在VBO中，我们要将这个VBO绑定在VAO(GL_ARRARY_BUFFER)上，在通过VAO塞入到vertexShader中进行绘制顶点。  
+   原理图：  
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Shader.png" width="400" alt="Shader">  
+   我尽量用我的理解来解释清楚一个.obj文件是如何加载和使用的。  
+   当读入一个 .obj文件到CPU后会通过很长的距离到达GPU，此时.obj文件解析成的数字坐标还不能被识别(arr)，我们需要把他装换成可以被识别的数组坐标。  
+   这些arr到达GPU后会放在VBO中，我们要将这个VBO绑定在VAO(GL_ARRARY_BUFFER)上，在通过VAO塞入到vertexShader中进行绘制顶点。  
  
- - Shader
- 将VAO塞入VertexShader中我们也要去操作 vertexShader 与 fragmentShader，所以我们也要在代码中写vertexShaderSource 与 fragmentShaderSource的代码来告诉GPU如何去描绘这些顶点。  
- 首先我们要创建VertexShader 与 fragmentShader，然后将Source塞入到里面，在将VertexShader 与 fragmentShader贴到 shaderProgram上，然后shaderProgram连接到Shader，这样Shader就可以读入Source中的代码了！   
- 连接上之后，在渲染回圈中使用连接上的 shaderProgram，接着将VAO绑定在 Vertex Shader上，利用VAO中的顶点数组绘制顶点，然后再往后的Shader中绘制图形。  
+ - Shader  
+ 
+   将VAO塞入VertexShader中我们也要去操作 vertexShader 与 fragmentShader，所以我们也要在代码中写vertexShaderSource 与 fragmentShaderSource的代码来告诉GPU如何去描绘这些顶点。  
+   首先我们要创建VertexShader 与 fragmentShader，然后将Source塞入到里面，在将VertexShader 与 fragmentShader贴到 shaderProgram上，然后shaderProgram连接到Shader，这样Shader就可以读入 Source中的代码了！   
+   连接上之后，在渲染回圈中使用连接上的 shaderProgram，接着将VAO绑定在 Vertex Shader上，利用VAO中的顶点数组绘制顶点，然后再往后的Shader中绘制图形。  
 
  更多请查看源文件里面有详细的注释[渲染原理](./OpenglEngine/main.cpp)
