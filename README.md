@@ -28,32 +28,32 @@ English | [简体中文](./README-CN.md)
  Mesh      |  [Mesh](./OpenglEngine/Mesh.h)
 
 ## The realization of basic functions
- I will put some necessary and basic code that I have learned for review.
- - Initialization and window construction
- Regarding window construction, you need to define the window
- ```cpp
- /*Create window*/
- GLFWwindow* window = glfwCreateWindow(800, 600, "OpenglEngine", nullptr, nullptr);
- ```
- Then perform rendering and display. Of course, we need to use a rendering loop during the rendering process.
+ I will put some necessary and basic code that I have learned for review.  
+- Initialization and window construction
+  Regarding window construction, you need to define the window
+  ```cpp
+  /*Create window*/
+  GLFWwindow* window = glfwCreateWindow(800, 600, "OpenglEngine", nullptr, nullptr);
+  ```
+  Then perform rendering and display. Of course, we need to use a rendering loop during the rendering process.  
 
- ```cpp
- /*Canves window*/
- glViewport(0, 0, 800, 600);
+  ```cpp
+  /*Canves window*/
+  glViewport(0, 0, 800, 600);
+  
+  /*Rendering loop*/
+  while(!glfwWindowShouldClose(window)) {
  
- /*Rendering loop*/
- while(!glfwWindowShouldClose(window)) {
+ 	/*Color temporary block exchange*/
+ 	glfwSwapBuffers(window);
+ 
+ 	/*Get user button*/
+ 	glfwPollEvents();
+  }
+  ```  
+For more, please see the detailed comments in the source file [Create Window](./OpenglEngine/main.cpp)  
 
-	/*Color temporary block exchange*/
-	glfwSwapBuffers(window);
-
-	/*Get user button*/
-	glfwPollEvents();
- }
- ```  
- For more, please see the detailed comments in the source file [Create Window](./OpenglEngine/main.cpp)  
-
- - Principle of rendering
+- Principle of rendering
    the schematic：  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Shader.png" width="400" alt="Shader">   
    
@@ -63,7 +63,7 @@ English | [简体中文](./README-CN.md)
   
    These arrs will be placed in the VBO after they reach the GPU. We need to bind this VBO to the VAO (GL_ARRARY_BUFFER), and plug it into the vertexShader through the VAO to draw the vertices.  
    
- - Shader  
+- Shader  
    Putting VAO into VertexShader we also need to operate vertexShader and fragmentShader, so we also need to write vertexShaderSource and fragmentShaderSource code in the code to tell the GPU how to draw these vertices.  
   
    First, we need to create VertexShader and fragmentShader, then insert the Source into it, paste the VertexShader and fragmentShader onto the shaderProgram, and then connect the shaderProgram to the Shader, so that the Shader can read the code in the Source!  
