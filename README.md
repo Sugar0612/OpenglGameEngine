@@ -28,7 +28,7 @@ English | [简体中文](./README-CN.md)
  Mesh      |  [Mesh](./OpenglEngine/Mesh.h)
 
 ## The realization of basic functions
- I will put some necessary and basic code that I have learned for review.  
+  I will put some necessary and basic code that I have learned for review.  
 - Initialization and window construction
   Regarding window construction, you need to define the window
   ```cpp
@@ -51,7 +51,7 @@ English | [简体中文](./README-CN.md)
  	glfwPollEvents();
   }
   ```  
-For more, please see the detailed comments in the source file [Create Window](./OpenglEngine/main.cpp)  
+  For more, please see the detailed comments in the source file [Create Window](./OpenglEngine/main.cpp)  
 
 - Principle of rendering
    the schematic：  
@@ -70,4 +70,4 @@ For more, please see the detailed comments in the source file [Create Window](./
   
    After connecting, use the connected shaderProgram in the rendering loop, then bind the VAO to the Vertex Shader, use the vertex array in the VAO to draw the vertices, and then draw the graphics in the subsequent Shader.   
 
-For more, please see the detailed comments in the source file [Render principle](./OpenglEngine/main.cpp)
+  For more, please see the detailed comments in the source file [Render principle](./OpenglEngine/main.cpp)
