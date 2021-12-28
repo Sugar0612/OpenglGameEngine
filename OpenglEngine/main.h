@@ -11,11 +11,20 @@ void ProcessInput(class GLFWwindow* window) {
 
 unsigned int VAO;
 unsigned int VBO;
+unsigned int EBO;
 
 float vertices[] = {
 	-0.5f, -0.5f, 0.0f,
 	 0.5f, -0.5f, 0.0f,
-	 0.0f,  0.5f, 0.0f
+	 0.0f,  0.5f, 0.0f,
+	 /*0.5f, -0.5f, 0.0f,
+	 0.0f,  0.5f, 0.0f,*/
+	 0.8f, 0.8f, 0.f
+};
+
+unsigned int indices[] = {
+	0, 1, 2,
+	2, 1, 3
 };
 
 const char* vertexShaderSource = 

@@ -58,6 +58,10 @@
    我尽量用我的理解来解释清楚一个.obj文件是如何加载和使用的。  
    当读入一个 .obj文件到CPU后会通过很长的距离到达GPU，此时.obj文件解析成的数字坐标还不能被识别(arr)，我们需要把他装换成可以被识别的数组坐标。  
    这些arr到达GPU后会放在VBO中，我们要将这个VBO绑定在VAO(GL_ARRARY_BUFFER)上，在通过VAO塞入到vertexShader中进行绘制顶点。  
+   
+   源代码告诉我们，如果只依靠 VBO + VAO 去绘制图形，那么会在代码中重复的顶点坐标，所以我们需要加入EBO 来依靠索引坐标(indices)来减少顶点坐标代码的冗余。
+   下面放一张 VAO,VBO, EBO之间的关系结构图来更好的了解他们之前的作用部位与关系：  
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/vertex_array_objects_ebo.png" width="400" alt="vertex_array_objects_ebo">  
  
  - Shader  
  

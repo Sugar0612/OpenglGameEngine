@@ -57,9 +57,13 @@ int main() {
 	glGenBuffers(1, &VBO);
 	/* 绑定VBO在VAO上面 */
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-
 	/* 把 .obj文件生成的顶点，从CPU塞到GPU中的VBO中去 */
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	/* 创建EBO的过程与VBO大致相似 */
+	glGenBuffers(1, &EBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	/* 创建一个vertexShader */
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -83,7 +87,7 @@ int main() {
 	/* 连接到Shader中去 */
 	glLinkProgram(shaderProgram);
 
-	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标) */
+	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	/* 打开VertexShader中的0号档口 */
 	glEnableVertexAttribArray(0);
@@ -98,9 +102,12 @@ int main() {
 		glUseProgram(shaderProgram);
 		/* 将VAO绑定在vertex上 */
 		glBindVertexArray(VAO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		/* 因为一个模型就是由一个一个的三角形构成的，
-		那么让我们来画一个类型为三角形的图形 */
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		那么让我们来画一个类型为三角形的图形*/
+
+		//glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
 
 		ProcessInput(window);
 

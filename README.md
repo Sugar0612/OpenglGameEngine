@@ -15,7 +15,7 @@ English | [简体中文](./README-CN.md)
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl2.png" width="400" alt="Linker">
  - Add `opengl32.lib`, `glfw3.lib` and `glew32s.lib` in `Project->Properties->Linker->Input->Additional dependencies`.  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/opengl3.png" width="400" alt="Linker In">  
- The environment loading is complete, if it fails, please download [Glfw DownLoad] from the official website (https://www.glfw.org/)
+ The environment loading is complete, if it fails, please download [Glfw DownLoad] from the official website [glfw download](https://www.glfw.org/)
 
 ## content
  You can quickly check the parts you want to know through the catalog.  
@@ -64,6 +64,10 @@ English | [简体中文](./README-CN.md)
   
    These arrs will be placed in the VBO after they reach the GPU. We need to bind this VBO to the VAO (GL_ARRARY_BUFFER), and plug it into the vertexShader through the VAO to draw the vertices.  
    
+   The source code tells us that if we only rely on VBO + VAO to draw graphics, then the vertex coordinates will be repeated in the code, so we need to add EBO to rely on index coordinates (indices) to reduce the redundancy of the vertex coordinate code.  
+   Below is a diagram of the relationship structure between VAO, VBO, and EBO to better understand their previous role and relationship:  
+   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/vertex_array_objects_ebo.png" width="400" alt="vertex_array_objects_ebo">  
+
 - Shader  
    Putting VAO into VertexShader we also need to operate vertexShader and fragmentShader, so we also need to write vertexShaderSource and fragmentShaderSource code in the code to tell the GPU how to draw these vertices.  
   
