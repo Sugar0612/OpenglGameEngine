@@ -75,7 +75,8 @@ English | [简体中文](./README-CN.md)
   
    After connecting, use the connected shaderProgram in the rendering loop, then bind the VAO to the Vertex Shader, use the vertex array in the VAO to draw the vertices, and then draw the graphics in the subsequent Shader.   
 
-   -Uniform
+   - Uniform  
+
     Uniform does not pass Vertex through VAO, it is directly stuffed into Vertex, we need to find the position of Uniform in Cpp, and then pass the value. For example:  
     
     ```cpp
