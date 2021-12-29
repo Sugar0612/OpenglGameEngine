@@ -75,4 +75,17 @@ English | [简体中文](./README-CN.md)
   
    After connecting, use the connected shaderProgram in the rendering loop, then bind the VAO to the Vertex Shader, use the vertex array in the VAO to draw the vertices, and then draw the graphics in the subsequent Shader.   
 
+   -Uniform
+    Uniform does not pass Vertex through VAO, it is directly stuffed into Vertex, we need to find the position of Uniform in Cpp, and then pass the value. For example:  
+    
+    ```cpp
+    timeValue = glfwGetTime();
+    dynamicColor = (sin(timeValue) * 0.5f) + 0.5f;
+    /* Find the position of the uniform in the Shader */
+    int vertexColorLocation = glGetUniformLocation(shaderProgram, "vertexColor");
+    /* Insert ve4 in the corresponding position */
+    glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
+    ```
+    Then manipulate these variables defined by Uniform in the Shader.  
+
   For more, please see the detailed comments in the source file [Render principle](./OpenglEngine/main.cpp)

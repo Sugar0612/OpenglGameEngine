@@ -68,5 +68,16 @@
    将VAO塞入VertexShader中我们也要去操作 vertexShader 与 fragmentShader，所以我们也要在代码中写vertexShaderSource 与 fragmentShaderSource的代码来告诉GPU如何去描绘这些顶点。  
    首先我们要创建VertexShader 与 fragmentShader，然后将Source塞入到里面，在将VertexShader 与 fragmentShader贴到 shaderProgram上，然后shaderProgram连接到Shader，这样Shader就可以读入 Source中的代码了！   
    连接上之后，在渲染回圈中使用连接上的 shaderProgram，接着将VAO绑定在 Vertex Shader上，利用VAO中的顶点数组绘制顶点，然后再往后的Shader中绘制图形。  
+   - Uniform  
+   Uniform 不通过VAO来传递 Vertex，那是直接偷偷塞进Vertex中，我们需要在Cpp中去寻找Uniform的位置，然后传递数值。例如：  
+   ```cpp
+   timeValue = glfwGetTime();
+   dynamicColor = (sin(timeValue) * 0.5f) + 0.5f;
+   /* 找到uniform在 Shader中的位置 */
+   int vertexColorLocation = glGetUniformLocation(shaderProgram, "vertexColor");
+   /* 塞入对应位置的ve4 */
+   glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
+   ```  
+   然后再在Shader操作这些用Uniform定义的变量。  
 
    更多请查看源文件里面有详细的注释[渲染原理](./OpenglEngine/main.cpp)

@@ -88,9 +88,14 @@ int main() {
 	glLinkProgram(shaderProgram);
 
 	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	/* 打开VertexShader中的0号档口 */
 	glEnableVertexAttribArray(0);
+
+	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
+	/* 打开VertexShader中的0号档口 */
+	glEnableVertexAttribArray(1);
 
 	/*渲染回圈*/
 	while(!glfwWindowShouldClose(window)) {
@@ -98,8 +103,6 @@ int main() {
 		glClearColor(0.2f, 0.3f, 0.3f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		/* 使用ShaderProgram */
-		glUseProgram(shaderProgram);
 		/* 将VAO绑定在vertex上 */
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -109,11 +112,20 @@ int main() {
 		//glDrawArrays(GL_TRIANGLES, 0, 6);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
 
-		ProcessInput(window);
+		
+		timeValue = glfwGetTime();
+		dynamicColor = (sin(timeValue) * 0.5f) + 0.5f;
+		/* 找到uniform在 Shader中的位置 */
+		int vertexColorLocation = glGetUniformLocation(shaderProgram, "vertexColor");
+		/* 塞入对应位置的ve4 */
+		glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
 
+		/* 使用ShaderProgram */
+		glUseProgram(shaderProgram);
+
+		ProcessInput(window);
 		/*颜色暂存区块交换*/
 		glfwSwapBuffers(window);
-
 		/*获取用户按钮*/
 		glfwPollEvents();
 	}
