@@ -58,4 +58,6 @@ unsigned int shaderProgram;
 float timeValue;
 float dynamicColor;
 
+
+class Shader* shader;
 #endif // !MAIN_H

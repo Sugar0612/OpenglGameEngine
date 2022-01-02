@@ -4,12 +4,12 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "main.h"
+#include "Shader.h"
 
 using namespace::std;
 
 
 int main() {
-	
 	/*初始化函数库*/
 	glfwInit();
 	/*主版本号*/
@@ -48,6 +48,10 @@ int main() {
 	/*Canves window*/
 	glViewport(0, 0, 800, 600);
 
+	/* Create Shader */
+	shader = new Shader("./VertexSource.txt", "./FragmentSource.txt");
+
+
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
 	/* 将这个VAO塞到Vertex Shader中 */
@@ -64,28 +68,6 @@ int main() {
 	glGenBuffers(1, &EBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	/* 创建一个vertexShader */
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	/* 填充vertexShader */
-	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-	/* 编译vertexShader */
-	glCompileShader(vertexShader);
-
-	/* fragmentShader的创建，填充与编译过程同vertexShader一样 */
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-	glCompileShader(fragmentShader);
-
-	/* 创建一个shaderProgram用来编译Shader */
-	shaderProgram = glCreateProgram();
-	/* 将vertexShader 与 fragmentShader组装在shaderProgram上... */
-	glAttachShader(shaderProgram, vertexShader);
-	glAttachShader(shaderProgram, fragmentShader);
-	/* ...这样才能将SaderSource中的代码运行起来 */
-
-	/* 连接到Shader中去 */
-	glLinkProgram(shaderProgram);
 
 	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -121,7 +103,8 @@ int main() {
 		glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
 
 		/* 使用ShaderProgram */
-		glUseProgram(shaderProgram);
+		//glUseProgram(shaderProgram);
+		shader->use();
 
 		ProcessInput(window);
 		/*颜色暂存区块交换*/
