@@ -24,6 +24,7 @@
  Window    |  [Window](./OpenglEngine/main.cpp)
  Camera    |  [Camera](./OpenglEngine/Camera.h)
  Shader    |  [Shader](./OpenglEngine/Shader.h)
+ Texture   |  [Texture](./OpenglEngine/Texture.h)
  Material  |  [Material](./OpenglEngine/Material.h)
  Mesh      |  [Mesh](./OpenglEngine/Mesh.h)
 
@@ -79,5 +80,26 @@
    glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
    ```  
    然后再在Shader操作这些用Uniform定义的变量。  
+   更多请查看源文件里面有详细的注释[渲染原理](./OpenglEngine/main.cpp)  
 
-   更多请查看源文件里面有详细的注释[渲染原理](./OpenglEngine/main.cpp)
+- Texture  
+
+  如何将图片通过 **Shader** 加载在窗口中？我们可以通过 **Texture** 传递给VAO来实现。  
+  ### 原理  
+  这里还是重点讲一讲原理，首先就是创建texture，方式和VAO VBO的创建方式一样，没有什么区别都是使用对应的API进行创建和类型的绑定，然后我们就可以使用 **stbi_load** 函数来载入图片，在进行填充和生成Mipmap。下面是代码，这样更加有助于理解。  
+  ```cpp
+  glGenTextures(1, &texBuffer);
+  glBindTexture(GL_TEXTURE_2D, texBuffer);
+  data = stbi_load(_filename, &width, &height, &Channel, 0);
+
+  /* 翻转图片 */
+  stbi_set_flip_vertically_on_load(true);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+  /* Open Mipmap */
+  glGenerateMipmap(GL_TEXTURE_2D);
+  ```
+
+  然后就是 Texture将加载的图片放到VAO中去，VAO中为Texture准备了8个接口让Texture插入图片，不同的Texture将不同的图片插入不同的接口中，就可以实现图片的叠加。  
+  至于如何实现选择不同接口Texture的插入，请查看源代码有注释的 [Texture插入](./OpenglEngine/main.cpp)，下面是Texture功能的展示：    
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Texture.png" width="400" alt="Texture">
+ 更多请查看源文件里面有详细的注释[纹理](./OpenglEngine/Texture.cpp)

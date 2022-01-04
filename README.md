@@ -24,6 +24,7 @@ English | [简体中文](./README-CN.md)
  Window    |  [Window](./OpenglEngine/main.cpp)
  Camera    |  [Camera](./OpenglEngine/Camera.h)
  Shader    |  [Shader](./OpenglEngine/Shader.h)
+ Texture   |  [Texture](./OpenglEngine/Texture.h)
  Material  |  [Material](./OpenglEngine/Material.h)
  Mesh      |  [Mesh](./OpenglEngine/Mesh.h)
 
@@ -89,4 +90,27 @@ English | [简体中文](./README-CN.md)
     ```
     Then manipulate these variables defined by Uniform in the Shader.  
 
-  For more, please see the detailed comments in the source file [Render principle](./OpenglEngine/main.cpp)
+   For more, please see the detailed comments in the source file [Render principle](./OpenglEngine/main.cpp)
+
+- Texture  
+
+  How to load pictures in the window through **Shader**? We can achieve this by passing **Texture** to VAO.  
+  ### Principle  
+  Here is the main point to talk about the principle, the first is to create the texture, the method is the same as that of the VAO VBO, there is no difference between using the corresponding API for creation and type binding, and then we can use the **stbi_load** function To load the picture, fill in and generate Mipmap. Below is the code, which is more helpful to understand.  
+
+  ```cpp
+  glGenTextures(1, &texBuffer);
+  glBindTexture(GL_TEXTURE_2D, texBuffer);
+  data = stbi_load(_filename, &width, &height, &Channel, 0);
+
+  /* Flip the picture */
+  stbi_set_flip_vertically_on_load(true);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+  /* Open Mipmap */
+  glGenerateMipmap(GL_TEXTURE_2D);
+  ```
+
+  Then Texture puts the loaded image into the VAO. In the VAO, 8 interfaces are prepared for the Texture to allow the Texture to insert the image. Different Texture inserts different images into different interfaces, and then the image can be superimposed.  
+  As for how to implement the selection of texture insertion in different interfaces, please check the commented [Texture Insert](./OpenglEngine/main.cpp) in the source code. The following is a demonstration of the Texture function:  
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Texture.png" width="400" alt="Texture">  
+ For more, please see the detailed comments in the source file [Texture](./OpenglEngine/Texture.cpp)

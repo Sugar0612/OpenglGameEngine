@@ -30,6 +30,9 @@
     <ClCompile Include="Material.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -50,6 +53,12 @@
     <ClInclude Include="stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="VertexSource.txt">
@@ -61,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="image\wall.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="image\container.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="image\awesomeface.png">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

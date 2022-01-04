@@ -5,6 +5,7 @@
 #include "GLFW/glfw3.h"
 #include "main.h"
 #include "Shader.h"
+#include "Texture.h"
 
 using namespace::std;
 
@@ -51,6 +52,10 @@ int main() {
 	/* Create Shader */
 	shader = new Shader("./VertexSource.txt", "./FragmentSource.txt");
 
+	/* Create Texture */
+	texture_Box = new Texture("./image/container.jpg", "JPG", GL_TEXTURE0);
+	texture_Face = new Texture("./image/awesomeface.png", "PNG", GL_TEXTURE1);
+
 
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
@@ -70,20 +75,23 @@ int main() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	/* 打开VertexShader中的0号档口 */
 	glEnableVertexAttribArray(0);
-
-	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(sizeof(float) * 3));
-	/* 打开VertexShader中的0号档口 */
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 6));
+	glEnableVertexAttribArray(2);
 
 	/*渲染回圈*/
 	while(!glfwWindowShouldClose(window)) {
 		/* 颜色清屏 */
 		glClearColor(0.2f, 0.3f, 0.3f, 1.f);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		/* 灌输Texture */
+		texture_Box->BindTexture();
+		texture_Face->BindTexture();
 
 		/* 将VAO绑定在vertex上 */
 		glBindVertexArray(VAO);
@@ -101,6 +109,9 @@ int main() {
 		int vertexColorLocation = glGetUniformLocation(shaderProgram, "vertexColor");
 		/* 塞入对应位置的ve4 */
 		glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
+
+		texture_Box->SetUniform(shader->shaderProgram, 0, "aTexture");
+		texture_Face->SetUniform(shader->shaderProgram, 1, "aFace");
 
 		/* 使用ShaderProgram */
 		//glUseProgram(shaderProgram);
