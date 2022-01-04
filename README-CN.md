@@ -101,5 +101,6 @@
 
   然后就是 Texture将加载的图片放到VAO中去，VAO中为Texture准备了8个接口让Texture插入图片，不同的Texture将不同的图片插入不同的接口中，就可以实现图片的叠加。  
   至于如何实现选择不同接口Texture的插入，请查看源代码有注释的 [Texture插入](./OpenglEngine/main.cpp)，下面是Texture功能的展示：    
-  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Texture.png" width="400" alt="Texture">
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Texture.png" width="400" alt="Texture">  
+  
  更多请查看源文件里面有详细的注释[纹理](./OpenglEngine/Texture.cpp)
