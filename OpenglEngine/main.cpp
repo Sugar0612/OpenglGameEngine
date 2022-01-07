@@ -22,7 +22,7 @@ int main() {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	/*Create window*/
-	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenglEngine", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(width, height, "OpenglEngine", nullptr, nullptr);
 	
 	/*Create Window Failed*/
 	if (window == nullptr) {
@@ -83,6 +83,11 @@ int main() {
 	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 6));
 	glEnableVertexAttribArray(2);
 
+	// 3d
+	modelMat = glm::rotate(modelMat, glm::radians(-55.f), glm::vec3(1.f, 0.f, 0.f));
+	viewMat = glm::translate(viewMat, glm::vec3(0.f, 0.f, -3.f));
+	projMat = glm::perspective(glm::radians(45.0f), (float)(width / height), 0.1f, 100.f);
+
 	/*渲染回圈*/
 	while(!glfwWindowShouldClose(window)) {
 		/* 颜色清屏 */
@@ -110,12 +115,19 @@ int main() {
 		/* 塞入对应位置的ve4 */
 		glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
 
+		/* 将Texture载入的图片插入到VAO的接口中 */
 		texture_Box->SetUniform(shader->shaderProgram, 0, "aTexture");
 		texture_Face->SetUniform(shader->shaderProgram, 1, "aFace");
 
 		/* 使用ShaderProgram */
 		//glUseProgram(shaderProgram);
 		shader->use();
+
+
+		/* 3D */
+		shader->UniformMat("modelMat", modelMat);
+		shader->UniformMat("viewMat", viewMat);
+		shader->UniformMat("projMat", projMat);
 
 		ProcessInput(window);
 		/*颜色暂存区块交换*/

@@ -2,6 +2,14 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
+
+
+int width = 800;
+int height = 600;
+
 /* glfw °´¼üÏìÓ¦ */
 void ProcessInput(class GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
@@ -37,4 +45,10 @@ float dynamicColor;
 class Shader* shader;
 class Texture* texture_Box;
 class Texture* texture_Face;
+
+
+
+glm::mat4 modelMat;
+glm::mat4 viewMat;
+glm::mat4 projMat;
 #endif // !MAIN_H

@@ -17,6 +17,7 @@ void Texture::CreateTextureAndLoadImage(GLenum port)
 
 	/* ·­×ªÍ¼Æ¬ */
 	stbi_set_flip_vertically_on_load(true);
+
 	if (data)
 	{
 		if (_image_type == "JPG")

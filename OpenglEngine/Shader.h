@@ -2,6 +2,9 @@
 #ifndef SHADER_H
 #define SHADER_H
 #include <string>
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 class Shader
 {
@@ -21,6 +24,7 @@ public:
 	/* Shader Program */
 	unsigned int shaderProgram;
 
+	void UniformMat(const char* name, glm::mat4 mat);
 
 public:
 	void use();
