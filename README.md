@@ -137,4 +137,4 @@ English | [简体中文](./README-CN.md)
    ```  
 
   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">  
- For more, please see the detailed comments in the source file [3D](./OpenglEngine/main.cpp)
+ For more, please see the detailed comments in the source file [Texture](./OpenglEngine/Texture.cpp)
