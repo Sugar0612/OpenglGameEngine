@@ -20,7 +20,7 @@ private:
 private:
 	int width, height, Channel;
 	unsigned char* data;
-
+	GLenum _port;
 public:
 	void BindTexture();
 	void SetUniform(unsigned int ID, int num, const GLchar* name);

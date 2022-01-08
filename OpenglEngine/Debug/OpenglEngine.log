@@ -1,13 +1,6 @@
-﻿  Camera.cpp
-  main.cpp
+﻿  main.cpp
 H:\Project\OpenglEngine\OpenglEngine\main.h(14,35): warning C4099: “GLFWwindow”: 类型名称以前使用“struct”现在使用的是“class”
 D:\OpenGL\glfw-3.3.4.bin.WIN32\include\GLFW\glfw3.h(1182): message : 参见“GLFWwindow”的声明
-H:\Project\OpenglEngine\OpenglEngine\main.cpp(111,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
-  Material.cpp
-  Mesh.cpp
-  Shader.cpp
-  Texture.cpp
-  正在生成代码...
 LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
 LINK : warning LNK4098: 默认库“LIBCMT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
 LINK : warning LNK4217: 符号“___glewAttachShader”(在“ glew32s.lib(glew.obj)”中定义)已由“Shader.obj”(函数“__catch$??0Shader@@QAE@PBD0@Z$0”中)导入
@@ -25,7 +18,7 @@ LINK : warning LNK4217: 符号“___glewLinkProgram”(在“ glew32s.lib(glew.o
 LINK : warning LNK4217: 符号“___glewShaderSource”(在“ glew32s.lib(glew.obj)”中定义)已由“Shader.obj”(函数“__catch$??0Shader@@QAE@PBD0@Z$0”中)导入
 LINK : warning LNK4217: 符号“___glewUniformMatrix4fv”(在“ glew32s.lib(glew.obj)”中定义)已由“Shader.obj”(函数“"public: void __thiscall Shader::UniformMat(char const *,struct glm::tmat4x4<float,0>)" (?UniformMat@Shader@@QAEXPBDU?$tmat4x4@M$0A@@glm@@@Z)”中)导入
 LINK : warning LNK4217: 符号“___glewUseProgram”(在“ glew32s.lib(glew.obj)”中定义)已由“Shader.obj”(函数“"public: void __thiscall Shader::use(void)" (?use@Shader@@QAEXXZ)”中)导入
-LINK : warning LNK4217: 符号“___glewActiveTexture”(在“ glew32s.lib(glew.obj)”中定义)已由“Texture.obj”(函数“"private: void __thiscall Texture::CreateTextureAndLoadImage(unsigned int)" (?CreateTextureAndLoadImage@Texture@@AAEXI@Z)”中)导入
+LINK : warning LNK4217: 符号“___glewActiveTexture”(在“ glew32s.lib(glew.obj)”中定义)已由“Texture.obj”(函数“"public: void __thiscall Texture::BindTexture(void)" (?BindTexture@Texture@@QAEXXZ)”中)导入
 LINK : warning LNK4217: 符号“___glewUniform1i”(在“ glew32s.lib(glew.obj)”中定义)已由“Texture.obj”(函数“"public: void __thiscall Texture::SetUniform(unsigned int,int,char const *)" (?SetUniform@Texture@@QAEXIHPBD@Z)”中)导入
 LINK : warning LNK4217: 符号“___glewGenerateMipmap”(在“ glew32s.lib(glew.obj)”中定义)已由“Texture.obj”(函数“"private: void __thiscall Texture::CreateTextureAndLoadImage(unsigned int)" (?CreateTextureAndLoadImage@Texture@@AAEXI@Z)”中)导入
 glew32s.lib(glew.obj) : warning LNK4099: 未找到 PDB“vc120.pdb”(使用“glew32s.lib(glew.obj)”或在“H:\Project\OpenglEngine\Debug\vc120.pdb”中寻找)；正在链接对象，如同没有调试信息一样

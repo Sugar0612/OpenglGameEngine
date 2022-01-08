@@ -3,7 +3,7 @@
 #include "Texture.h"
 #include <iostream>
 
-Texture::Texture(const char* filename, std::string image_type, GLenum port): _filename(filename), _image_type(image_type)
+Texture::Texture(const char* filename, std::string image_type, GLenum port): _filename(filename), _image_type(image_type), _port(port)
 {
 	CreateTextureAndLoadImage(port);
 }
@@ -40,6 +40,7 @@ void Texture::CreateTextureAndLoadImage(GLenum port)
 
 void Texture::BindTexture() 
 {
+	glActiveTexture(_port);
 	glBindTexture(GL_TEXTURE_2D, texBuffer);
 }
 

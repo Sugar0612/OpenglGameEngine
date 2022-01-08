@@ -30,7 +30,7 @@
 
 ## 基本功能的实现
  我会放一些我学习到的必要且基础的代码用来回顾。
- - 初始化与窗口的搭建
+ ### 初始化与窗口的搭建
    关于窗口搭建，需要定义窗口
    ```cpp
    /*Create window*/
@@ -53,7 +53,7 @@
    ```
    更多请查看源文件里面有详细的注释[创建窗口](./OpenglEngine/main.cpp)
 
- - 渲染的原理   
+ ### 渲染的原理   
    原理图：  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Shader.png" width="400" alt="Shader">  
    我尽量用我的理解来解释清楚一个.obj文件是如何加载和使用的。  
@@ -64,7 +64,7 @@
    下面放一张 VAO,VBO, EBO之间的关系结构图来更好的了解他们之前的作用部位与关系：  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/vertex_array_objects_ebo.png" width="400" alt="vertex_array_objects_ebo">  
  
- - Shader  
+ ### Shader  
  
    将VAO塞入VertexShader中我们也要去操作 vertexShader 与 fragmentShader，所以我们也要在代码中写vertexShaderSource 与 fragmentShaderSource的代码来告诉GPU如何去描绘这些顶点。  
    首先我们要创建VertexShader 与 fragmentShader，然后将Source塞入到里面，在将VertexShader 与 fragmentShader贴到 shaderProgram上，然后shaderProgram连接到Shader，这样Shader就可以读入 Source中的代码了！   
@@ -82,7 +82,7 @@
    然后再在Shader操作这些用Uniform定义的变量。  
    更多请查看源文件里面有详细的注释[渲染原理](./OpenglEngine/main.cpp)  
 
-- Texture  
+ ### Texture  
 
   如何将图片通过 **Shader** 加载在窗口中？我们可以通过 **Texture** 传递给VAO来实现。  
   ### 原理  
@@ -102,5 +102,27 @@
   然后就是 Texture将加载的图片放到VAO中去，VAO中为Texture准备了8个接口让Texture插入图片，不同的Texture将不同的图片插入不同的接口中，就可以实现图片的叠加。  
   至于如何实现选择不同接口Texture的插入，请查看源代码有注释的 [Texture插入](./OpenglEngine/main.cpp)，下面是Texture功能的展示：    
   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Texture.png" width="400" alt="Texture">  
-  
  更多请查看源文件里面有详细的注释[纹理](./OpenglEngine/Texture.cpp)
+ ### 3D
+  绘制3D立方体，我们需要利用 **glm** 文件，你可以通过 [Glm Download](./Opengl.zip)，或者通过官方下载：[GLm Official Download](https://glm.g-truc.net/0.9.9/index.html)，然后像前面配置环境一样，将glm加入到C++包括目录中。  
+
+  如何把一张平面的2D图，把他拼成一个立方体呢？我们该怎么做？以下我想通过我的学习来用我的方法来进行说明。  
+  以下我将放上从2D到3D的一个原理图：  
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/coordinate_systems.png" width="400" alt="coordinate_systems">  
+  我们可以通过这个图片来去构造 **Model Matrix**， ** View Matrix **， ** Porject Matrix **我们把这三个矩阵通过Uniform塞入Vertex Shader Source中，然后乘上 ** gl_Postion **来变成3D啦！  
+  - Model Matrix  
+    它是用来决定这个3d立方体的状态的，包括他的位置，他的距离(translate)，他绕那个轴旋转...
+  - View Matrix
+    它是用来决定我们观察的位置的，一般要给 viewMat 的Z轴 -3，这样就可以让摄像机在世界中心啦！
+  - project Matrix
+    这个我理解的是 他是用来标准化空间的，物体的远近与透视投影都是由他来完成。  
+  然后我们在通过 vertices 用 VBO + VAO来绘制， 当然如果你有相关的 indices 你就可以用EBO来绘制了。。 
+  ### Z-Buffer
+   我们还没有结束，以为Opengl还分不清那个是前面，那个是后面，所以我们要让他去检测 Z-Buffer，即：如果前面已经有东西渲染了那么就不要在那个像素点与渲染其他东西了。  
+   ```cpp
+   glEnable(GL_DEPTH_TEST);
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+   ```  
+
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">
+ 更多请查看源文件里面有详细的注释[3D](./OpenglEngine/main.cpp)

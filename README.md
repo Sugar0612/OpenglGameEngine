@@ -55,7 +55,7 @@ English | [简体中文](./README-CN.md)
   ```  
   For more, please see the detailed comments in the source file [Create Window](./OpenglEngine/main.cpp)  
 
-- Principle of rendering
+### Principle of rendering
    the schematic：  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Shader.png" width="400" alt="Shader">   
    
@@ -69,7 +69,7 @@ English | [简体中文](./README-CN.md)
    Below is a diagram of the relationship structure between VAO, VBO, and EBO to better understand their previous role and relationship:  
    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/vertex_array_objects_ebo.png" width="400" alt="vertex_array_objects_ebo">  
 
-- Shader  
+### Shader  
    Putting VAO into VertexShader we also need to operate vertexShader and fragmentShader, so we also need to write vertexShaderSource and fragmentShaderSource code in the code to tell the GPU how to draw these vertices.  
   
    First, we need to create VertexShader and fragmentShader, then insert the Source into it, paste the VertexShader and fragmentShader onto the shaderProgram, and then connect the shaderProgram to the Shader, so that the Shader can read the code in the Source!  
@@ -92,7 +92,7 @@ English | [简体中文](./README-CN.md)
 
    For more, please see the detailed comments in the source file [Render principle](./OpenglEngine/main.cpp)
 
-- Texture  
+### Texture  
 
   How to load pictures in the window through **Shader**? We can achieve this by passing **Texture** to VAO.  
   ### Principle  
@@ -114,3 +114,27 @@ English | [简体中文](./README-CN.md)
   As for how to implement the selection of texture insertion in different interfaces, please check the commented [Texture Insert](./OpenglEngine/main.cpp) in the source code. The following is a demonstration of the Texture function:  
   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/Texture.png" width="400" alt="Texture">  
  For more, please see the detailed comments in the source file [Texture](./OpenglEngine/Texture.cpp)
+
+### 3D
+  To draw a 3D cube, we need to use the **glm** file, you can download it through [Glm Download](./Opengl.zip), or through the official download: [GLm Official Download](https://glm.g-truc. net/0.9.9/index.html), then add glm to the C++ include directory as you did before configuring the environment.  
+
+  How to put a flat 2D drawing into a cube? what should we do? Below I would like to illustrate with my method through my study.  
+  Below I will put a schematic diagram from 2D to 3D:  
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/coordinate_systems.png" width="400" alt="coordinate_systems">  
+  We can construct **Model Matrix**, ** View Matrix **, ** Porject Matrix ** through this image. We put these three matrices into Vertex Shader Source through Uniform, and then multiply ** gl_Postion * *Come into 3D!  
+  - Model Matrix  
+    It is used to determine the state of this 3d cube, including his position, his distance (translate), his rotation around that axis...  
+  -View Matrix  
+    It is used to determine the position of our observation, generally to the Z axis of viewMat -3, so that the camera can be in the center of the world!  
+  - project Matrix  
+    What I understand is that it is used to standardize the space, and the distance and perspective projection of objects are completed by him.  
+  Then we are using VBO + VAO to draw through vertices, of course if you have relevant indices you can use EBO to draw..  
+  ### Z-Buffer  
+   We haven't finished yet, thinking that Opengl can't tell which is the front and which is the back, so we have to let him detect the Z-Buffer, that is: if there is already something rendered in front, then don't render other things at that pixel..  
+   ```cpp  
+   glEnable(GL_DEPTH_TEST);
+   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+   ```  
+
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">  
+ For more details, please check the source file for detailed comments [3D](./OpenglEngine/main.cpp)
