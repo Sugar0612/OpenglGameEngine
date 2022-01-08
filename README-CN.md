@@ -124,5 +124,6 @@
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
    ```  
 
-  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">  
+  
  更多请查看源文件里面有详细的注释 [3D立体](./OpenglEngine/main.cpp)
