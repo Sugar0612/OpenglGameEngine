@@ -108,7 +108,7 @@
 
   如何把一张平面的2D图，把他拼成一个立方体呢？我们该怎么做？以下我想通过我的学习来用我的方法来进行说明。  
   以下我将放上从2D到3D的一个原理图：  
-  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/coordinate_systems.png" width="400" alt="coordinate_systems">  
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/coordinate_systems (1).png" width="400" alt="coordinate_systems">  
   我们可以通过这个图片来去构造 **Model Matrix**， ** View Matrix **， ** Porject Matrix **我们把这三个矩阵通过Uniform塞入Vertex Shader Source中，然后乘上 ** gl_Postion **来变成3D啦！  
   - Model Matrix  
     它是用来决定这个3d立方体的状态的，包括他的位置，他的距离(translate)，他绕那个轴旋转...
@@ -125,4 +125,4 @@
    ```  
 
   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">
- 更多请查看源文件里面有详细的注释[3D](./OpenglEngine/main.cpp)
+ 更多请查看源文件里面有详细的注释 [3D立体](./OpenglEngine/main.cpp)
