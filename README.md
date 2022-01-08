@@ -78,17 +78,17 @@ English | [简体中文](./README-CN.md)
 
    - Uniform  
 
-    Uniform does not pass Vertex through VAO, it is directly stuffed into Vertex, we need to find the position of Uniform in Cpp, and then pass the value. For example:  
+   Uniform does not pass Vertex through VAO, it is directly stuffed into Vertex, we need to find the position of Uniform in Cpp, and then pass the value. For example:  
     
-    ```cpp
-    timeValue = glfwGetTime();
-    dynamicColor = (sin(timeValue) * 0.5f) + 0.5f;
-    /* Find the position of the uniform in the Shader */
-    int vertexColorLocation = glGetUniformLocation(shaderProgram, "vertexColor");
-    /* Insert ve4 in the corresponding position */
-    glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
-    ```
-    Then manipulate these variables defined by Uniform in the Shader.  
+   ```cpp
+   timeValue = glfwGetTime();
+   dynamicColor = (sin(timeValue) * 0.5f) + 0.5f;
+   /* Find the position of the uniform in the Shader */
+   int vertexColorLocation = glGetUniformLocation(shaderProgram, "vertexColor");
+   /* Insert ve4 in the corresponding position */
+   glUniform4f(vertexColorLocation, 0.f, dynamicColor, 0.f, 1.f);
+   ```
+   Then manipulate these variables defined by Uniform in the Shader.  
 
    For more, please see the detailed comments in the source file [Render principle](./OpenglEngine/main.cpp)
 
@@ -116,15 +116,15 @@ English | [简体中文](./README-CN.md)
  For more, please see the detailed comments in the source file [Texture](./OpenglEngine/Texture.cpp)
 
 ### 3D
-  To draw a 3D cube, we need to use the **glm** file, you can download it through [Glm Download](./Opengl.zip), or through the official download: [GLm Official Download](https://glm.g-truc. net/0.9.9/index.html), then add glm to the C++ include directory as you did before configuring the environment.  
+  To draw a 3D cube, we need to use the **glm** file, you can download it through [Glm Download](./Opengl.zip), or through the official download: [GLm Official Download](https://glm.g-truc.net/0.9.9/index.html), then add glm to the C++ include directory as you did before configuring the environment.  
 
   How to put a flat 2D drawing into a cube? what should we do? Below I would like to illustrate with my method through my study.  
   Below I will put a schematic diagram from 2D to 3D:  
-  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/coordinate_systems.png" width="400" alt="coordinate_systems">  
+  <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/coordinate_systems (1).png" width="400" alt="coordinate_systems">  
   We can construct **Model Matrix**, ** View Matrix **, ** Porject Matrix ** through this image. We put these three matrices into Vertex Shader Source through Uniform, and then multiply ** gl_Postion * *Come into 3D!  
   - Model Matrix  
     It is used to determine the state of this 3d cube, including his position, his distance (translate), his rotation around that axis...  
-  -View Matrix  
+  - View Matrix  
     It is used to determine the position of our observation, generally to the Z axis of viewMat -3, so that the camera can be in the center of the world!  
   - project Matrix  
     What I understand is that it is used to standardize the space, and the distance and perspective projection of objects are completed by him.  
