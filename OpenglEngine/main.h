@@ -22,7 +22,7 @@ unsigned int VBO;
 unsigned int EBO;
 
 float vertices[] = {
-         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+     -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
      0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
      0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
      0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
@@ -94,6 +94,7 @@ float dynamicColor;
 
 
 class Shader* shader;
+class Camera* camera;
 class Texture* texture_Box;
 class Texture* texture_Face;
 
@@ -102,4 +103,5 @@ class Texture* texture_Face;
 glm::mat4 modelMat;
 glm::mat4 viewMat;
 glm::mat4 projMat;
+glm::mat4 modelarr[10];
 #endif // !MAIN_H

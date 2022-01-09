@@ -6,6 +6,7 @@
 #include "main.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Camera.h"
 
 using namespace::std;
 
@@ -56,6 +57,8 @@ int main() {
 	texture_Box = new Texture("./image/container.jpg", "JPG", GL_TEXTURE0);
 	texture_Face = new Texture("./image/awesomeface.png", "PNG", GL_TEXTURE1);
 
+	/* Create Camera */
+	camera = new Camera(glm::vec3(0.f, 0.f, 3.f), 15.0f, 180.f, glm::vec3(0.f, 1.f, 0.f));
 
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
@@ -84,7 +87,8 @@ int main() {
 	glEnableVertexAttribArray(2);
 
 	// 3d
-	viewMat = glm::translate(viewMat, glm::vec3(0.f, 0.f, -3.f));
+	//viewMat = glm::translate(viewMat, glm::vec3(0.f, 0.f, -3.f));
+	viewMat = camera->GetViewMatrix();
 	projMat = glm::perspective(glm::radians(45.0f), (float)(width / height), 0.1f, 100.f);
 
 	/*渲染回圈*/
@@ -107,11 +111,16 @@ int main() {
 		/* 因为一个模型就是由一个一个的三角形构成的，
 		那么让我们来画一个类型为三角形的图形*/
 
+		/* Crate arrary of matrix model. */
 		for (int i = 0; i < 10; ++i) {
-
 			glm::mat4 modelMat = glm::mat4();
 			modelMat = glm::translate(modelMat, cubePositions[i]);
 			modelMat = glm::rotate(modelMat, (float)glfwGetTime() * (i + 1) * glm::radians(50.0f), glm::vec3(1.f, 1.f, 0.f));
+			modelarr[i] = modelMat;
+		}
+
+		
+		for (int i = 0; i < 10; ++i) {
 
 			/* 使用ShaderProgram */
 			shader->use();
@@ -121,14 +130,15 @@ int main() {
 			texture_Face->SetUniform(shader->shaderProgram, 1, "aFace");
 
 			/* 3D */
-			shader->UniformMat("modelMat", modelMat);
+			shader->UniformMat(("offsets[" + to_string(i) + "]").c_str(), modelarr[i]);
 			shader->UniformMat("viewMat", viewMat);
 			shader->UniformMat("projMat", projMat);
 
-			/* 当没有给indics的时候 就用 VBO的glDrawArrays画吧 */
-			glDrawArrays(GL_TRIANGLES, 0, 36);
+			//glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
+		/* 这里我们只需要执行一次 glDrawArrays就可以一次性加载成百上千的模型啦~ */
+		glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);
 
 		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
 
