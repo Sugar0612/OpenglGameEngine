@@ -33,8 +33,17 @@ int main() {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         		return -1;
 	}
 
+	/* Create Camera */
+	camera = new Camera(glm::vec3(0.f, 0.f, 3.f), 15.0f, 180.f, glm::vec3(0.f, 1.f, 0.f));
+
 	/*设置为主窗口*/
 	glfwMakeContextCurrent(window);
+
+	/* 关闭游标显示 */
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+	/* 获取游标在视窗的坐标 */
+	glfwSetCursorPosCallback(window, mouse_callback);
 
 	/*Init Glew*/
 
@@ -50,15 +59,13 @@ int main() {
 	/*Canves window*/
 	glViewport(0, 0, 800, 600);
 
+
 	/* Create Shader */
 	shader = new Shader("./VertexSource.txt", "./FragmentSource.txt");
 
 	/* Create Texture */
 	texture_Box = new Texture("./image/container.jpg", "JPG", GL_TEXTURE0);
 	texture_Face = new Texture("./image/awesomeface.png", "PNG", GL_TEXTURE1);
-
-	/* Create Camera */
-	camera = new Camera(glm::vec3(0.f, 0.f, 3.f), 15.0f, 180.f, glm::vec3(0.f, 1.f, 0.f));
 
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
@@ -88,7 +95,6 @@ int main() {
 
 	// 3d
 	//viewMat = glm::translate(viewMat, glm::vec3(0.f, 0.f, -3.f));
-	viewMat = camera->GetViewMatrix();
 	projMat = glm::perspective(glm::radians(45.0f), (float)(width / height), 0.1f, 100.f);
 
 	/*渲染回圈*/
@@ -110,6 +116,9 @@ int main() {
 		//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		/* 因为一个模型就是由一个一个的三角形构成的，
 		那么让我们来画一个类型为三角形的图形*/
+
+		/* 改变相机视角 */
+		viewMat = camera->GetViewMatrix();
 
 		/* Crate arrary of matrix model. */
 		for (int i = 0; i < 10; ++i) {
@@ -152,6 +161,8 @@ int main() {
 		glfwSwapBuffers(window);
 		/*获取用户按钮*/
 		glfwPollEvents();
+
+		camera->UpdataCameraPos();
 	}
 
 

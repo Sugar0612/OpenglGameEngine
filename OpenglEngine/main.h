@@ -5,16 +5,66 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "Camera.h"
 
+class Shader* shader;
+class Camera* camera;
+class Texture* texture_Box;
+class Texture* texture_Face;
 
 int width = 800;
 int height = 600;
+
+float prevX;
+float prevY;
+bool is_first = true;
 
 /* glfw °´¼üÏìÓ¦ */
 void ProcessInput(class GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, true);
 	}
+
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        camera->speedZ += 0.05f;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        camera->speedZ -= 0.05f;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
+        camera->speedX -= 0.05f;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
+        camera->speedX += 0.05f;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
+        camera->speedY -= 0.05f;
+    }
+
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
+        camera->speedY += 0.05f;
+    }
+}
+
+void mouse_callback(GLFWwindow* window, double xPos, double yPos) {
+    if (is_first) {
+        prevX = xPos;
+        prevY = yPos;
+        is_first = false;
+    }
+
+    float dirX, dirY;
+    dirX = xPos - prevX;
+    dirY = yPos - prevY;
+    
+    prevX = xPos;
+    prevY = yPos;
+
+    camera->CameraMovment(dirX, dirY);
 }
 
 unsigned int VAO;
@@ -91,13 +141,6 @@ unsigned int shaderProgram;
 
 float timeValue;
 float dynamicColor;
-
-
-class Shader* shader;
-class Camera* camera;
-class Texture* texture_Box;
-class Texture* texture_Face;
-
 
 
 glm::mat4 modelMat;

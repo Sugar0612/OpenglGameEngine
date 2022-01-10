@@ -20,9 +20,21 @@ public:
 
 	glm::mat4 view;
 
-	float pitch;
-	float yaw;
+	float multiple = 0.005f;
+
+	float speedX = 0.f;
+	float speedY = 0.f;
+	float speedZ = 0.f;
+
+	float Pitch;
+	float Yaw;
 public:
 	glm::mat4 GetViewMatrix();
+
+	void CameraMovment(float dirX, float dirY);
+
+	void UpdataCameraPos();
+private:
+	void UpdataCameraVector();
 };
 

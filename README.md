@@ -138,4 +138,38 @@ English | [简体中文](./README-CN.md)
 
   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">  
   
- For more, please see the detailed comments in the source file [3D](./OpenglEngine/Texture.cpp)
+ For more, please see the detailed comments in the source file [3D](./OpenglEngine/Texture.cpp)  
+
+### camera
+  Now we want to view the cube from different orientations by moving the mouse and entering keyboard actions. So what should we do?  
+  - How to achieve the camera's moving perspective by moving the mouse?  
+    In fact, we can observe the cube from different positions by changing the View Matrix, but this is not complete, nor is it the full function of a camera, so we need to get the camera's Forward, Right, Up, and the world vector WorldUp. Their calculations are used to control View Martix.  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/camera_axes.png" width="400" alt="camera_axes">  
+
+    Of course, these can only determine the camera's perspective, so how do we use the mouse to make the camera 'head up' and 'turn its head'? We also need some angles: Pitch, Yaw. Then calculate Forward through some mathematical calculations, and then indirectly change the Forward of the Camera by changing Ptich and Yaw by obtaining the coordinates of the mouse.  
+    It also changes the angle of the camera.  
+    Get camera coordinates:  
+    ```cpp
+    /* Get the coordinates of the cursor in the window */
+    glfwSetCursorPosCallback(window, mouse_callback);
+
+    void mouse_callback(GLFWwindow* window, double xPos, double yPos) {
+        if (is_first) {
+            prevX = xPos;
+            prevY = yPos;
+            is_first = false;
+        }
+
+        float dirX, dirY;
+        dirX = xPos - prevX;
+        dirY = yPos - prevY;
+    
+        prevX = xPos;
+        prevY = yPos;
+
+        camera->CameraMovment(dirX, dirY);
+    }
+    ```  
+    Pitch and Yaw concept map:  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/camera_pitch_yaw_roll.png" width="400" alt="camera_pitch_yaw_roll">  
+ For more details, please check the source file for detailed comments [Camera](./OpenglEngine/Camera.cpp).

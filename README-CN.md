@@ -126,4 +126,37 @@
 
   <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/3D.png" width="400" alt="3D">  
   
- 更多请查看源文件里面有详细的注释 [3D立体](./OpenglEngine/main.cpp)
+ 更多请查看源文件里面有详细的注释 [3D立体](./OpenglEngine/main.cpp)  
+
+ ### 相机
+  现在我们想通过移动鼠标 和 输入键盘操作来从不同的方位观察立方体。那么我们该怎么做呢？  
+  - 如何通过鼠标移动来实现相机的移动视角？  
+    其实我们完全可以通过改变 View Matrix 来从不同位置来观察立方体，但是这样是不完全的，也不是一个相机的全部功能，所以我们需要得到 相机的 Forward, Right, Up, 以及世界向量 WorldUp 在通过对于他们的计算来控制 View Martix。  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/camera_axes.png" width="400" alt="camera_axes">  
+    当然这些只能确定相机的视角，那么我们该怎么通过鼠标来让相机 ‘抬头’，‘转头’呢？ 我们还需要一些角度： Pitch，Yaw。 然后通过一些数学计算算出 Forward 然后在通过获取鼠标坐标改变 Ptich 和 Yaw 就间接的改变了Camera 的 Forward，  
+    也就改变了相机的角度。  
+    获取相机坐标：  
+    ```cpp
+    /* 获取游标在视窗的坐标 */
+	glfwSetCursorPosCallback(window, mouse_callback);
+
+    void mouse_callback(GLFWwindow* window, double xPos, double yPos) {
+        if (is_first) {
+            prevX = xPos;
+            prevY = yPos;
+            is_first = false;
+        }
+
+        float dirX, dirY;
+        dirX = xPos - prevX;
+        dirY = yPos - prevY;
+    
+        prevX = xPos;
+        prevY = yPos;
+
+        camera->CameraMovment(dirX, dirY);
+    }
+    ```  
+    Pitch与Yaw概念图：  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/camera_pitch_yaw_roll.png" width="400" alt="camera_pitch_yaw_roll">  
+ 更多请查看源文件里面有详细的注释 [相机](./OpenglEngine/Camera.cpp)
