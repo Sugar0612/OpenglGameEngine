@@ -169,8 +169,8 @@
     <ClInclude Include="Texture.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="FragmentSource.txt" />
-    <Text Include="VertexSource.txt" />
+    <Text Include="FragmentSource.frag" />
+    <Text Include="VertexSource.vert" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="image\awesomeface.png" />

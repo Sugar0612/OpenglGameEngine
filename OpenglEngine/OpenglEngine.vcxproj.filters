@@ -61,10 +61,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="VertexSource.txt">
+    <Text Include="VertexSource.vert">
       <Filter>资源文件</Filter>
     </Text>
-    <Text Include="FragmentSource.txt">
+    <Text Include="FragmentSource.frag">
       <Filter>资源文件</Filter>
     </Text>
   </ItemGroup>

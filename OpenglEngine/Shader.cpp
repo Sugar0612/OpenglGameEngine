@@ -90,6 +90,10 @@ void Shader::UniformMat(const char* name, glm::mat4 mat)
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name), 1, GL_FALSE, glm::value_ptr(mat));
 }
 
+void Shader::SetUniform3f(const char* uniName, float x, float y, float z) {
+	glUniform3f(glGetUniformLocation(shaderProgram, uniName), x, y, z);
+}
+
 Shader::~Shader()
 {
 }

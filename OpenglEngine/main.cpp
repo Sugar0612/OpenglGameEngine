@@ -61,7 +61,7 @@ int main() {
 
 
 	/* Create Shader */
-	shader = new Shader("./VertexSource.txt", "./FragmentSource.txt");
+	shader = new Shader("./VertexSource.vert", "./FragmentSource.frag");
 
 	/* Create Texture */
 	texture_Box = new Texture("./image/container.jpg", "JPG", GL_TEXTURE0);
@@ -145,6 +145,10 @@ int main() {
 
 			//glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
+
+		/* Light's Color */
+		shader->SetUniform3f("ambientColor", 0.f, 1.f, 0.f);
+		shader->SetUniform3f("objColor", 1.f, 0.5f, 0.31f);
 
 		/* 这里我们只需要执行一次 glDrawArrays就可以一次性加载成百上千的模型啦~ */
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);
