@@ -160,3 +160,26 @@
     Pitch与Yaw概念图：  
     <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/camera_pitch_yaw_roll.png" width="400" alt="camera_pitch_yaw_roll">  
  更多请查看源文件里面有详细的注释 [相机](./OpenglEngine/Camera.cpp)
+
+ ### 基础光照  
+  我们的立方体上面只有贴图没有自然中的最普遍的光照效果，那么我们该怎么用Opengl仿照基础光照的效果呢？  
+  - 冯氏光照/漫反射光照  
+    我们需要在有直射光的基础上来体现阴影，如图：  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/diffuse_light.png" width="400" alt="diffuse_light">  
+    我们需要两个数据，一个是 光的位置，另一个就是法向量Normal, 法向量我们可以通过 vertices 从VAO中传入，而光的位置自己定义一个通过 Uniform 传入就好，下面我们需要将 LightPos 这个位置发出的光变成向量，那么，我们就需要用 (lightPos - FragPos),
+    这个 FragPos 就是光照射在物体上的位置，(FragPos = vec3(modelMat * aPos).xyz)，然后我们点乘 dot(Normal, (lightPos - FragPos)) 得到漫反射光的强度，在乘上 LightColor就得到真正的漫反射光了。  
+
+  - 镜面反射  
+    镜面反射就是当你看这个立方体，他给你反射出光源的亮点，那就是镜面反射了，如果立方体材质表面粗糙，那么这个反射的光源就是一个范围，放上原理图便于更好的理解：  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/dbasic_lighting_specular_theory.png" width="400" alt= "dbasic_lighting_specular_theory">  
+    我们已经在 漫反射中得到了 Normal 和 LightDir了，那么我们现在需要知道反射的光源向量(reflectVec) 和 眼镜的位置向量(eyeVec)，这两个都好得到，reflectVec就是 -LightDir 与 法向量的关系，而GLSL给了我们解决这个问题的函数，
+    (reflectVec = reflect(-LightVec, Normal))，而 eyeVec 就是像得到 LightDir一样，(eyeVec = normalize(eyePos - FragPos))，这样我们再将 reflectVec 与 eyeVec 点乘，就可以得到镜面反射，但是镜面反射效果不是很强烈，
+    可以通过加倍(pow(a, b))来增强镜面反射的效果。  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/specular.png" width="400" alt="specular">  
+
+  - 关于法向量Normal计算  
+    Normal = mat3(transpose(inverse(offsets[gl_InstanceID]))) * aNormal 这是为什么呢？  
+    从OpenGL了解到，由于当物体进行不规则缩放的时候，法向量会改变，为了解决这样的问题，需要定制一个模型矩阵，所以需要这样计算。  
+    详情：[关于Normal的计算](https://learnopengl-cn.readthedocs.io/zh/latest/02%20Lighting/02%20Basic%20Lighting/)  
+
+ 更多请查看源文件里面有详细的注释 [基础光照-vert](./OpenglEngine/VertexSource.vert) ， [基础光照-frag](./OpenglEngine/FragmentSource.frag)

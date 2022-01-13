@@ -173,3 +173,26 @@ English | [简体中文](./README-CN.md)
     Pitch and Yaw concept map:  
     <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/camera_pitch_yaw_roll.png" width="400" alt="camera_pitch_yaw_roll">  
  For more details, please check the source file for detailed comments [Camera](./OpenglEngine/Camera.cpp).
+
+### Basic Lighting  
+  There are only textures on our cube without the most common lighting effects in nature, so how can we use Opengl to imitate the effect of basic lighting?  
+  - Fung Lighting/Diffuse Lighting  
+    We need to reflect the shadow on the basis of direct light, as shown in the figure:  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/diffuse_light.png" width="400" alt="diffuse_light">  
+    We need two data, one is the position of the light, and the other is the normal vector Normal. The normal vector can be passed in from the VAO through vertices, and the position of the light can be defined by itself and passed in through the Uniform. Next we need to pass the LightPos The light emitted from this position becomes a vector, then, we need to use (lightPos - FragPos),
+    This FragPos is the position where the light shines on the object, (FragPos = vec3(modelMat * aPos).xyz), and then we multiply dot(Normal, (lightPos - FragPos)) to get the intensity of the diffuse light, and multiply it by LightColor. Get true diffuse light.  
+
+  - reflection of mirror  
+    Specular reflection is when you look at the cube, it reflects the bright spots of the light source for you, that is specular reflection, if the surface of the cube material is rough, then the reflected light source is a range, put the schematic diagram for better understanding:  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/dbasic_lighting_specular_theory.png" width="400" alt= "dbasic_lighting_specular_theory">  
+    We have obtained Normal and LightDir in diffuse reflection, then we now need to know the reflected light source vector (reflectVec) and the position vector of glasses (eyeVec), both of which are easy to get, reflectVec is the relationship between -LightDir and normal vector , and GLSL gives us the function to solve this problem,  
+    (reflectVec = reflect(-LightVec, Normal)), and eyeVec is the same as getting LightDir, (eyeVec = normalize(eyePos - FragPos)), so we multiply reflectVec and eyeVec to get specular reflection, but specular reflection The effect is not very strong,
+    The effect of specular reflection can be enhanced by doubling (pow(a, b)).  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/specular.png" width="400" alt="specular">  
+
+  - About normal vector Normal calculation  
+    Normal = mat3(transpose(inverse(offsets[gl_InstanceID]))) * aNormal Why is this?  
+    It is known from OpenGL that when the object is scaled irregularly, the normal vector will change. In order to solve such a problem, a model matrix needs to be customized, so this calculation is required.  
+    Details: [About the calculation of Normal](https://learnopengl-cn.readthedocs.io/zh/latest/02%20Lighting/02%20Basic%20Lighting/)  
+
+ For more details, please check the source file for detailed comments [basic lighting-vert](./OpenglEngine/VertexSource.vert) , [basic lighting-frag](./OpenglEngine/FragmentSource.frag)

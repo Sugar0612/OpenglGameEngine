@@ -85,13 +85,12 @@ int main() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	/* 打开VertexShader中的0号档口 */
 	glEnableVertexAttribArray(0);
-	/*glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(1);*/
-	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(sizeof(float) * 3));
-	glEnableVertexAttribArray(2);
+	
+	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(3);
 
 	// 3d
 	//viewMat = glm::translate(viewMat, glm::vec3(0.f, 0.f, -3.f));
@@ -100,7 +99,7 @@ int main() {
 	/*渲染回圈*/
 	while(!glfwWindowShouldClose(window)) {
 		/* 颜色清屏 */
-		glClearColor(0.2f, 0.3f, 0.3f, 1.f);
+		glClearColor(0.f, 0.f, 0.f, 1.f);
 
 		/* Z-buffer */
 		glEnable(GL_DEPTH_TEST);
@@ -147,8 +146,12 @@ int main() {
 		}
 
 		/* Light's Color */
-		shader->SetUniform3f("ambientColor", 0.f, 1.f, 0.f);
+		shader->SetUniform3f("ambientColor", 0.2f, 0.2f, 0.2f);
 		shader->SetUniform3f("objColor", 1.f, 0.5f, 0.31f);
+		shader->SetUniform3f("lightPos", 10.f, 10.f, 5.f);
+		shader->SetUniform3f("lightColor", 1.f, 1.f, 1.f);
+		//shader->SetUniform3f("FragPos");
+		shader->SetUniform3f("eyePos", camera->Postion.x, camera->Postion.y, camera->Postion.z);
 
 		/* 这里我们只需要执行一次 glDrawArrays就可以一次性加载成百上千的模型啦~ */
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);
