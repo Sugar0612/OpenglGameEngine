@@ -26,6 +26,7 @@ public:
 
 	void UniformMat(const char* name, glm::mat4 mat);
 	void SetUniform3f(const char* uniName, float x, float y, float z);
+	void SetUniform1f(const char* uniName, float x);
 public:
 	void use();
 

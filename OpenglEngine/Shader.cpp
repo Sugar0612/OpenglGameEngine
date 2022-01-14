@@ -94,6 +94,11 @@ void Shader::SetUniform3f(const char* uniName, float x, float y, float z) {
 	glUniform3f(glGetUniformLocation(shaderProgram, uniName), x, y, z);
 }
 
+void Shader::SetUniform1f(const char* uniName, float num)
+{
+	glUniform1f(glGetUniformLocation(shaderProgram, uniName), num);
+}
+
 Shader::~Shader()
 {
 }

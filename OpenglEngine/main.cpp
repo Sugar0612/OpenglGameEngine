@@ -123,7 +123,7 @@ int main() {
 		for (int i = 0; i < 10; ++i) {
 			glm::mat4 modelMat = glm::mat4();
 			modelMat = glm::translate(modelMat, cubePositions[i]);
-			modelMat = glm::rotate(modelMat, (float)glfwGetTime() * (i + 1) * glm::radians(50.0f), glm::vec3(1.f, 1.f, 0.f));
+			modelMat = glm::rotate(modelMat, (float)glfwGetTime() * 0 * glm::radians(50.0f), glm::vec3(1.f, 1.f, 0.f));
 			modelarr[i] = modelMat;
 		}
 
@@ -152,6 +152,12 @@ int main() {
 		shader->SetUniform3f("lightColor", 1.f, 1.f, 1.f);
 		//shader->SetUniform3f("FragPos");
 		shader->SetUniform3f("eyePos", camera->Postion.x, camera->Postion.y, camera->Postion.z);
+
+		/* 材质 */
+		shader->SetUniform3f("material.ambient", 1.0f, 1.0f, 1.f);
+		shader->SetUniform3f("material.diffuse", 0.f, 0.f, 1.f);
+		shader->SetUniform3f("material.specular", 1.f, 1.f, 1.f);
+		shader->SetUniform1f("material.shininess", 128.0f);
 
 		/* 这里我们只需要执行一次 glDrawArrays就可以一次性加载成百上千的模型啦~ */
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);
