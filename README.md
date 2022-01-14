@@ -184,7 +184,7 @@ English | [简体中文](./README-CN.md)
 
   - reflection of mirror  
     Specular reflection is when you look at the cube, it reflects the bright spots of the light source for you, that is specular reflection, if the surface of the cube material is rough, then the reflected light source is a range, put the schematic diagram for better understanding:  
-    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/dbasic_lighting_specular_theory.png" width="400" alt= "dbasic_lighting_specular_theory">  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/basic_lighting_specular_theory.png" width="400" alt= "dbasic_lighting_specular_theory">  
     We have obtained Normal and LightDir in diffuse reflection, then we now need to know the reflected light source vector (reflectVec) and the position vector of glasses (eyeVec), both of which are easy to get, reflectVec is the relationship between -LightDir and normal vector , and GLSL gives us the function to solve this problem,  
     (reflectVec = reflect(-LightVec, Normal)), and eyeVec is the same as getting LightDir, (eyeVec = normalize(eyePos - FragPos)), so we multiply reflectVec and eyeVec to get specular reflection, but specular reflection The effect is not very strong,
     The effect of specular reflection can be enhanced by doubling (pow(a, b)).  

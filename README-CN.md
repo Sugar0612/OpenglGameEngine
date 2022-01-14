@@ -171,7 +171,7 @@
 
   - 镜面反射  
     镜面反射就是当你看这个立方体，他给你反射出光源的亮点，那就是镜面反射了，如果立方体材质表面粗糙，那么这个反射的光源就是一个范围，放上原理图便于更好的理解：  
-    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/dbasic_lighting_specular_theory.png" width="400" alt= "dbasic_lighting_specular_theory">  
+    <img src = "https://raw.githubusercontent.com/Sugar0612/OpenglGameEngine/main/image/basic_lighting_specular_theory.png" width="400" alt= "dbasic_lighting_specular_theory">  
     我们已经在 漫反射中得到了 Normal 和 LightDir了，那么我们现在需要知道反射的光源向量(reflectVec) 和 眼镜的位置向量(eyeVec)，这两个都好得到，reflectVec就是 -LightDir 与 法向量的关系，而GLSL给了我们解决这个问题的函数，
     (reflectVec = reflect(-LightVec, Normal))，而 eyeVec 就是像得到 LightDir一样，(eyeVec = normalize(eyePos - FragPos))，这样我们再将 reflectVec 与 eyeVec 点乘，就可以得到镜面反射，但是镜面反射效果不是很强烈，
     可以通过加倍(pow(a, b))来增强镜面反射的效果。  
