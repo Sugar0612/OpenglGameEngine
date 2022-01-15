@@ -7,9 +7,9 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Camera.h"
+#include "Material.h"
 
 using namespace::std;
-
 
 int main() {
 	/*初始化函数库*/
@@ -67,6 +67,9 @@ int main() {
 	texture_Box = new Texture("./image/container.jpg", "JPG", GL_TEXTURE0);
 	texture_Face = new Texture("./image/awesomeface.png", "PNG", GL_TEXTURE1);
 
+	/* Create Material */
+	material = new Material(glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 1.f, 1.f), 128.0f);
+
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
 	/* 将这个VAO塞到Vertex Shader中 */
@@ -98,6 +101,7 @@ int main() {
 
 	/*渲染回圈*/
 	while(!glfwWindowShouldClose(window)) {
+
 		/* 颜色清屏 */
 		glClearColor(0.f, 0.f, 0.f, 1.f);
 
@@ -154,10 +158,17 @@ int main() {
 		shader->SetUniform3f("eyePos", camera->Postion.x, camera->Postion.y, camera->Postion.z);
 
 		/* 材质 */
-		shader->SetUniform3f("material.ambient", 1.0f, 1.0f, 1.f);
-		shader->SetUniform3f("material.diffuse", 0.f, 0.f, 1.f);
-		shader->SetUniform3f("material.specular", 1.f, 1.f, 1.f);
-		shader->SetUniform1f("material.shininess", 128.0f);
+		shader->SetUniform3f_vec("material.ambient", material->ambient);
+		shader->SetUniform3f_vec("material.diffuse", material->diffuse);
+		shader->SetUniform3f_vec("material.specular", material->specular);
+		shader->SetUniform1f("material.shininess", material->shininess);
+
+		float f1 = ((glm::sin(glfwGetTime()) + 1.f) / 2.f);
+		float f2 = 0.f;
+		float f3 = ((glm::sin(glfwGetTime()) + 1.f) / 2.f);
+		std::cout << f1 << "  " << f2 << "  " << f3 << std::endl;
+
+		material->specular = glm::vec3(f1, f2, f3);
 
 		/* 这里我们只需要执行一次 glDrawArrays就可以一次性加载成百上千的模型啦~ */
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);

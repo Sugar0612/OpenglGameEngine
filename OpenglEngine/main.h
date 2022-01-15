@@ -11,6 +11,7 @@ class Shader* shader;
 class Camera* camera;
 class Texture* texture_Box;
 class Texture* texture_Face;
+class Material* material;
 
 int width = 800;
 int height = 600;
