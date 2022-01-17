@@ -66,9 +66,10 @@ int main() {
 	/* Create Texture */
 	texture_Box = new Texture("./image/container.jpg", "JPG", GL_TEXTURE0);
 	texture_Face = new Texture("./image/awesomeface.png", "PNG", GL_TEXTURE1);
+	texture_container2 = new Texture("./image/container2.png", "PNG", GL_TEXTURE2);
 
 	/* Create Material */
-	material = new Material(glm::vec3(1.f, 1.f, 1.f), glm::vec3(0.f, 0.f, 1.f), glm::vec3(1.f, 1.f, 1.f), 128.0f);
+	material = new Material(glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), 128.0f);
 
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
@@ -88,12 +89,15 @@ int main() {
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	/* 告诉GPU中的 VertexShader 如何分辨数组中的数据(多少长度是一个点的坐标)VBO */
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
 	/* 打开VertexShader中的0号档口 */
 	glEnableVertexAttribArray(0);
 	
-	glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-	glEnableVertexAttribArray(3);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
 
 	// 3d
 	//viewMat = glm::translate(viewMat, glm::vec3(0.f, 0.f, -3.f));
@@ -110,8 +114,7 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		/* 灌输Texture */
-		texture_Box->BindTexture();
-		texture_Face->BindTexture();
+		texture_container2->BindTexture();
 
 		/* 将VAO绑定在vertex上 */
 		glBindVertexArray(VAO);
@@ -138,8 +141,9 @@ int main() {
 			shader->use();
 
 			/* 将Texture载入的图片插入到VAO的接口中 */
-			texture_Box->SetUniform(shader->shaderProgram, 0, "aTexture");
-			texture_Face->SetUniform(shader->shaderProgram, 1, "aFace");
+			/*texture_Box->SetUniform(shader->shaderProgram, 0, "aTexture");
+			texture_Face->SetUniform(shader->shaderProgram, 1, "material.diffuse");*/
+			texture_container2->Texshader->TextureSetUniform(2, "material.diffuse");
 
 			/* 3D */
 			shader->UniformMat(("offsets[" + to_string(i) + "]").c_str(), modelarr[i]);
@@ -150,25 +154,18 @@ int main() {
 		}
 
 		/* Light's Color */
-		shader->SetUniform3f("ambientColor", 0.2f, 0.2f, 0.2f);
-		shader->SetUniform3f("objColor", 1.f, 0.5f, 0.31f);
+		shader->SetUniform3f("ambientColor", 0.05f, 0.05f, 0.05f);
+		shader->SetUniform3f("objColor", 1.f, 1.f, 1.f);
 		shader->SetUniform3f("lightPos", 10.f, 10.f, 5.f);
 		shader->SetUniform3f("lightColor", 1.f, 1.f, 1.f);
 		//shader->SetUniform3f("FragPos");
 		shader->SetUniform3f("eyePos", camera->Postion.x, camera->Postion.y, camera->Postion.z);
 
 		/* 材质 */
-		shader->SetUniform3f_vec("material.ambient", material->ambient);
-		shader->SetUniform3f_vec("material.diffuse", material->diffuse);
-		shader->SetUniform3f_vec("material.specular", material->specular);
-		shader->SetUniform1f("material.shininess", material->shininess);
-
-		float f1 = ((glm::sin(glfwGetTime()) + 1.f) / 2.f);
-		float f2 = 0.f;
-		float f3 = ((glm::sin(glfwGetTime()) + 1.f) / 2.f);
-		std::cout << f1 << "  " << f2 << "  " << f3 << std::endl;
-
-		material->specular = glm::vec3(f1, f2, f3);
+		material->shader->SetUniform3f_vec("material.ambient", material->ambient);
+		//shader->SetUniform3f_vec("material.diffuse", material->diffuse);
+		material->shader->SetUniform3f_vec("material.specular", material->specular);
+		material->shader->SetUniform1f("material.shininess", material->shininess);
 
 		/* 这里我们只需要执行一次 glDrawArrays就可以一次性加载成百上千的模型啦~ */
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);

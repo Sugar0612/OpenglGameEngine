@@ -103,6 +103,11 @@ void Shader::SetUniform1f(const char* uniName, float num)
 	glUniform1f(glGetUniformLocation(shaderProgram, uniName), num);
 }
 
+void Shader::TextureSetUniform(GLint port, const GLchar* name)
+{
+	glUniform1i(glGetUniformLocation(shaderProgram, name), port);
+}
+
 Shader::~Shader()
 {
 }

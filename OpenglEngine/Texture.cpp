@@ -6,6 +6,7 @@
 Texture::Texture(const char* filename, std::string image_type, GLenum port): _filename(filename), _image_type(image_type), _port(port)
 {
 	CreateTextureAndLoadImage(port);
+	Texshader = new Shader("./VertexSource.vert", "./FragmentSource.frag");
 }
 
 void Texture::CreateTextureAndLoadImage(GLenum port)
@@ -44,7 +45,7 @@ void Texture::BindTexture()
 	glBindTexture(GL_TEXTURE_2D, texBuffer);
 }
 
-void Texture::SetUniform(unsigned int ID, int num, const GLchar* name) 
+void Texture::SetUniform(unsigned int ID, GLint num, const GLchar* name) 
 {
 	glUniform1i(glGetUniformLocation(ID, name), num);
 }

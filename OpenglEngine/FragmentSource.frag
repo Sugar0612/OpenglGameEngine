@@ -2,10 +2,11 @@
 
 in vec3 Normal;
 in vec3 FragPos;
+in vec2 TexCoords;
 
 struct Material {
   vec3 ambient;
-  vec3 diffuse;
+  sampler2D diffuse;
   vec3 specular;
   float shininess;
 };
@@ -29,8 +30,9 @@ void main()
     float specularAmount = pow(max(dot(eyeVec, reflectVec), 0.f), material.shininess);
 
     vec3 Specular = specularAmount * lightColor * material.specular;
-    vec3 Diffuse = max(dot(lightDir, Normal), 0.f) * lightColor * material.diffuse;
-    vec3 Ambient = ambientColor * material.ambient;
+    vec3 Diffuse = texture(material.diffuse, TexCoords).rgb * max(dot(lightDir, Normal), 0.f) * lightColor;
+    //vec3 Diffuse = texture(material.diffuse, TexCoords).rgb;
+    vec3 Ambient = texture(material.diffuse, TexCoords).rgb * ambientColor * material.ambient;
 
     vec3 resultColor = (Diffuse + Specular + Ambient) * objColor;
     FragColor = vec4(resultColor, 1.f);

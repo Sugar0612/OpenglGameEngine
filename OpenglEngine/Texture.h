@@ -3,6 +3,7 @@
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 #include "stb_image.h"
+#include "shader.h"
 
 class Texture
 {
@@ -12,6 +13,7 @@ public:
 
 public:
 	unsigned int texBuffer;
+	Shader* Texshader;
 
 private:
 	const char* _filename;
@@ -21,6 +23,7 @@ private:
 	int width, height, Channel;
 	unsigned char* data;
 	GLenum _port;
+
 public:
 	void BindTexture();
 	void SetUniform(unsigned int ID, int num, const GLchar* name);

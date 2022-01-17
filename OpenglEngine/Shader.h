@@ -5,6 +5,8 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
 
 class Shader
 {
@@ -28,6 +30,7 @@ public:
 	void SetUniform3f(const char* uniName, float x, float y, float z);
 	void SetUniform3f_vec(const char* uniName, glm::vec3 vec);
 	void SetUniform1f(const char* uniName, float x);
+	void TextureSetUniform(GLint port, const GLchar* name);
 public:
 	void use();
 
