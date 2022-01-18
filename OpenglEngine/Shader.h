@@ -30,7 +30,7 @@ public:
 	void SetUniform3f(const char* uniName, float x, float y, float z);
 	void SetUniform3f_vec(const char* uniName, glm::vec3 vec);
 	void SetUniform1f(const char* uniName, float x);
-	void TextureSetUniform(GLint port, const GLchar* name);
+	void TextureSetUniform(GLint port, const char* name);
 public:
 	void use();
 

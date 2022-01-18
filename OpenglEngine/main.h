@@ -9,9 +9,8 @@
 
 class Shader* shader;
 class Camera* camera;
-class Texture* texture_Box;
-class Texture* texture_Face;
 class Texture* texture_container2;
+class Texture* container_specular;
 class Material* material;
 
 int width = 800;

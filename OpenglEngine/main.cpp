@@ -64,9 +64,8 @@ int main() {
 	shader = new Shader("./VertexSource.vert", "./FragmentSource.frag");
 
 	/* Create Texture */
-	texture_Box = new Texture("./image/container.jpg", "JPG", GL_TEXTURE0);
-	texture_Face = new Texture("./image/awesomeface.png", "PNG", GL_TEXTURE1);
 	texture_container2 = new Texture("./image/container2.png", "PNG", GL_TEXTURE2);
+	container_specular = new Texture("./image/container2_specular.png", "PNG", GL_TEXTURE3);
 
 	/* Create Material */
 	material = new Material(glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), 128.0f);
@@ -115,6 +114,7 @@ int main() {
 
 		/* 灌输Texture */
 		texture_container2->BindTexture();
+		container_specular->BindTexture();
 
 		/* 将VAO绑定在vertex上 */
 		glBindVertexArray(VAO);
@@ -141,9 +141,8 @@ int main() {
 			shader->use();
 
 			/* 将Texture载入的图片插入到VAO的接口中 */
-			/*texture_Box->SetUniform(shader->shaderProgram, 0, "aTexture");
-			texture_Face->SetUniform(shader->shaderProgram, 1, "material.diffuse");*/
 			texture_container2->Texshader->TextureSetUniform(2, "material.diffuse");
+			container_specular->Texshader->TextureSetUniform(3, "material.specular");
 
 			/* 3D */
 			shader->UniformMat(("offsets[" + to_string(i) + "]").c_str(), modelarr[i]);

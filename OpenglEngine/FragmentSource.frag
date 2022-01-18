@@ -7,7 +7,7 @@ in vec2 TexCoords;
 struct Material {
   vec3 ambient;
   sampler2D diffuse;
-  vec3 specular;
+  sampler2D specular;
   float shininess;
 };
 
@@ -29,7 +29,7 @@ void main()
     /* 高光强度 */
     float specularAmount = pow(max(dot(eyeVec, reflectVec), 0.f), material.shininess);
 
-    vec3 Specular = specularAmount * lightColor * material.specular;
+    vec3 Specular = specularAmount * lightColor * texture(material.specular, TexCoords).rgb;
     vec3 Diffuse = texture(material.diffuse, TexCoords).rgb * max(dot(lightDir, Normal), 0.f) * lightColor;
     //vec3 Diffuse = texture(material.diffuse, TexCoords).rgb;
     vec3 Ambient = texture(material.diffuse, TexCoords).rgb * ambientColor * material.ambient;
