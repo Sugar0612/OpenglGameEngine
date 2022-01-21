@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "Camera.h"
 #include "Material.h"
+#include "LightDir.h"
 
 using namespace::std;
 
@@ -60,15 +61,18 @@ int main() {
 	glViewport(0, 0, 800, 600);
 
 
-	/* Create Shader */
+	/* Create Shader. */
 	shader = new Shader("./VertexSource.vert", "./FragmentSource.frag");
 
-	/* Create Texture */
+	/* Create Texture. */
 	texture_container2 = new Texture("./image/container2.png", "PNG", GL_TEXTURE2);
 	container_specular = new Texture("./image/container2_specular.png", "PNG", GL_TEXTURE3);
 
-	/* Create Material */
+	/* Create Material. */
 	material = new Material(glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), 128.0f);
+
+	/* Create Light Direction. */
+	lightDir = new LightDir(glm::vec3(10.f, 10.f, -5.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(glm::radians(45.0f), 0.f, 0.f));
 
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
@@ -153,12 +157,12 @@ int main() {
 		}
 
 		/* Light's Color */
-		shader->SetUniform3f("ambientColor", 0.05f, 0.05f, 0.05f);
+		shader->SetUniform3f("ambientColor", 0.1f, 0.1f, 0.1f);
 		shader->SetUniform3f("objColor", 1.f, 1.f, 1.f);
-		shader->SetUniform3f("lightPos", 10.f, 10.f, 5.f);
-		shader->SetUniform3f("lightColor", 1.f, 1.f, 1.f);
-		//shader->SetUniform3f("FragPos");
-		shader->SetUniform3f("eyePos", camera->Postion.x, camera->Postion.y, camera->Postion.z);
+		shader->SetUniform3f_vec("lightPos", lightDir->position);
+		shader->SetUniform3f_vec("lightColor", lightDir->color);
+		shader->SetUniform3f_vec("lightDir", lightDir->direction);
+		shader->SetUniform3f_vec("eyePos", camera->Postion);
 
 		/* 材质 */
 		material->shader->SetUniform3f_vec("material.ambient", material->ambient);

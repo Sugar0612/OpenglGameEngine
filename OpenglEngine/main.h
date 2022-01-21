@@ -12,6 +12,7 @@ class Camera* camera;
 class Texture* texture_container2;
 class Texture* container_specular;
 class Material* material;
+class LightDir* lightDir;
 
 int width = 800;
 int height = 600;
@@ -27,27 +28,27 @@ void ProcessInput(class GLFWwindow* window) {
 	}
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        camera->speedZ += 0.05f;
+        camera->speedZ += 0.01f;
     }
 
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        camera->speedZ -= 0.05f;
+        camera->speedZ -= 0.01f;
     }
 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        camera->speedX -= 0.05f;
+        camera->speedX -= 0.01f;
     }
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        camera->speedX += 0.05f;
+        camera->speedX += 0.01f;
     }
 
     if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) {
-        camera->speedY -= 0.05f;
+        camera->speedY -= 0.01f;
     }
 
     if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) {
-        camera->speedY += 0.05f;
+        camera->speedY += 0.01f;
     }
 }
 
@@ -149,4 +150,7 @@ glm::mat4 modelMat;
 glm::mat4 viewMat;
 glm::mat4 projMat;
 glm::mat4 modelarr[10];
+
+
+
 #endif // !MAIN_H
