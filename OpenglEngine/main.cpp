@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "Material.h"
 #include "LightDir.h"
+#include "lightPoint.h"
 
 using namespace::std;
 
@@ -73,6 +74,9 @@ int main() {
 
 	/* Create Light Direction. */
 	lightDir = new LightDir(glm::vec3(10.f, 10.f, -5.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(glm::radians(45.0f), 0.f, 0.f));
+
+	/* Create Light Point. */
+	lightPtr = new LightPoint(glm::vec3(1.f, 1.f, -1.f), glm::vec3(2.f, 2.f, 2.f), glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0.f));
 
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
@@ -159,9 +163,12 @@ int main() {
 		/* Light's Color */
 		shader->SetUniform3f("ambientColor", 0.1f, 0.1f, 0.1f);
 		shader->SetUniform3f("objColor", 1.f, 1.f, 1.f);
-		shader->SetUniform3f_vec("lightPos", lightDir->position);
-		shader->SetUniform3f_vec("lightColor", lightDir->color);
-		shader->SetUniform3f_vec("lightDir", lightDir->direction);
+		shader->SetUniform3f_vec("lightPos", lightPtr->position);
+		shader->SetUniform3f_vec("lightColor", lightPtr->color);
+		shader->SetUniform3f_vec("lightDir", lightPtr->direction);
+		shader->SetUniform1f("lightPtr.constant", lightPtr->constant);
+		shader->SetUniform1f("lightPtr.linear", lightPtr->linear);
+		shader->SetUniform1f("lightPtr.quadratic", lightPtr->quadratic);
 		shader->SetUniform3f_vec("eyePos", camera->Postion);
 
 		/* 材质 */
