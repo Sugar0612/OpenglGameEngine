@@ -14,7 +14,7 @@ class Texture* container_specular;
 class Material* material;
 class LightDir* lightDir;
 class LightPoint* lightPtr;
-
+class LightSpot* lightSpot;
 
 int width = 800;
 int height = 600;

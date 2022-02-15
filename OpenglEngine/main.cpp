@@ -10,6 +10,8 @@
 #include "Material.h"
 #include "LightDir.h"
 #include "lightPoint.h"
+#include "LightSpot.h"
+
 
 using namespace::std;
 
@@ -73,11 +75,14 @@ int main() {
 	material = new Material(glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(1.f, 1.f, 1.f), 128.0f);
 
 	/* Create Light Direction. */
-	lightDir = new LightDir(glm::vec3(10.f, 10.f, -5.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(glm::radians(45.0f), 0.f, 0.f));
+	//lightDir = new LightDir(glm::vec3(10.f, 10.f, -5.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(glm::radians(45.0f), 0.f, 0.f));
 
 	/* Create Light Point. */
-	lightPtr = new LightPoint(glm::vec3(1.f, 1.f, -1.f), glm::vec3(2.f, 2.f, 2.f), glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0.f));
+	//lightPtr = new LightPoint(glm::vec3(1.f, 1.f, -1.f), glm::vec3(2.f, 2.f, 2.f), glm::vec3(glm::radians(45.0f), glm::radians(45.0f), 0.f));
 
+	/* Create Light of Spot. */
+	lightSpot = new LightSpot(glm::vec3(0.f, 2.f, 0.f), glm::vec3(1.f, 1.f, 1.f), glm::vec3(glm::radians(90.f), 0, 0));
+	
 	/* 创建一个放Vertex的数组 */
 	glGenVertexArrays(1, &VAO);
 	/* 将这个VAO塞到Vertex Shader中 */
@@ -135,12 +140,12 @@ int main() {
 		viewMat = camera->GetViewMatrix();
 
 		/* Crate arrary of matrix model. */
-		for (int i = 0; i < 10; ++i) {
+		/*for (int i = 0; i < 10; ++i) {
 			glm::mat4 modelMat = glm::mat4();
 			modelMat = glm::translate(modelMat, cubePositions[i]);
 			modelMat = glm::rotate(modelMat, (float)glfwGetTime() * 0 * glm::radians(50.0f), glm::vec3(1.f, 1.f, 0.f));
 			modelarr[i] = modelMat;
-		}
+		}*/
 
 		
 		for (int i = 0; i < 10; ++i) {
@@ -152,33 +157,40 @@ int main() {
 			texture_container2->Texshader->TextureSetUniform(2, "material.diffuse");
 			container_specular->Texshader->TextureSetUniform(3, "material.specular");
 
+			glm::mat4 modelMat = glm::mat4();
+			modelMat = glm::translate(modelMat, cubePositions[i]);
+			modelMat = glm::rotate(modelMat, (float)glfwGetTime() * 0 * glm::radians(50.0f), glm::vec3(1.f, 1.f, 0.f));
+
 			/* 3D */
-			shader->UniformMat(("offsets[" + to_string(i) + "]").c_str(), modelarr[i]);
+			//shader->UniformMat(("offsets[" + to_string(i) + "]").c_str(), modelarr[i]);
+			shader->UniformMat("modelMat", modelMat);
 			shader->UniformMat("viewMat", viewMat);
 			shader->UniformMat("projMat", projMat);
 
-			//glDrawArrays(GL_TRIANGLES, 0, 36);
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 		}
 
 		/* Light's Color */
 		shader->SetUniform3f("ambientColor", 0.1f, 0.1f, 0.1f);
 		shader->SetUniform3f("objColor", 1.f, 1.f, 1.f);
-		shader->SetUniform3f_vec("lightPos", lightPtr->position);
-		shader->SetUniform3f_vec("lightColor", lightPtr->color);
-		shader->SetUniform3f_vec("lightDir", lightPtr->direction);
-		shader->SetUniform1f("lightPtr.constant", lightPtr->constant);
-		shader->SetUniform1f("lightPtr.linear", lightPtr->linear);
-		shader->SetUniform1f("lightPtr.quadratic", lightPtr->quadratic);
+		shader->SetUniform3f_vec("lightPos", lightSpot->position);
+		shader->SetUniform3f_vec("lightColor", lightSpot->color);
+		shader->SetUniform3f_vec("lightDir", lightSpot->direction);
+		shader->SetUniform1f("lightSpot.cosPhy", lightSpot->cosPhy);
+
+		//shader->SetUniform1f("lightPtr.constant", lightPtr->constant);
+		//shader->SetUniform1f("lightPtr.linear", lightPtr->linear);
+		//shader->SetUniform1f("lightPtr.quadratic", lightPtr->quadratic);
 		shader->SetUniform3f_vec("eyePos", camera->Postion);
 
 		/* 材质 */
 		material->shader->SetUniform3f_vec("material.ambient", material->ambient);
-		//shader->SetUniform3f_vec("material.diffuse", material->diffuse);
+		shader->SetUniform3f_vec("material.diffuse", material->diffuse);
 		material->shader->SetUniform3f_vec("material.specular", material->specular);
 		material->shader->SetUniform1f("material.shininess", material->shininess);
 
 		/* 这里我们只需要执行一次 glDrawArrays就可以一次性加载成百上千的模型啦~ */
-		glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);
+		//glDrawArraysInstanced(GL_TRIANGLES, 0, 36, 10);
 
 		//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)0);
 
